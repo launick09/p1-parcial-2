@@ -1,10 +1,222 @@
 [
     {
         "id": 1,
-        "nombre": "Producto",
-        "descripcion": "Descripción del producto",
-        "precio": 0,
-        "imagen": "images/producto-de-ejemplo.jpg",
-        "categoría": "Nombre de la categoría"
+        "nombre": "Licuadora Pro",
+        "descripcion": "Licuadora de alta potencia ideal para batidos y salsas.",
+        "precio": 35000.0,
+        "imagen": null,
+        "categoria": "Electrodomésticos",
+        "stock": 15,
+        "rating": 4.5
+    },
+    {
+        "id": 2,
+        "nombre": "Máquina de Espresso",
+        "descripcion": "Máquina de espresso de alta calidad con múltiples configuraciones.",
+        "precio": 38000.0,
+        "imagen": null,
+        "categoria": "Electrodomésticos",
+        "stock": 5,
+        "rating": 4.7
+    },
+    {
+        "id": 3,
+        "nombre": "Hervidor Eléctrico",
+        "descripcion": "Hervidor eléctrico de ebullición rápida con apagado automático.",
+        "precio": 6000.0,
+        "imagen": null,
+        "categoria": "Electrodomésticos",
+        "stock": 20,
+        "rating": 4.5
+    },
+    {
+        "id": 4,
+        "nombre": "Cuchara de Madera",
+        "descripcion": "Cuchara de madera para mezclar y cocinar.",
+        "precio": 1500.0,
+        "imagen": null,
+        "categoria": "Utensilios",
+        "stock": 50,
+        "rating": 4.6
+    },
+    {
+        "id": 5,
+        "nombre": "Espátula de Silicona",
+        "descripcion": "Espátula de silicona resistente al calor.",
+        "precio": 2000.0,
+        "imagen": null,
+        "categoria": "Utensilios",
+        "stock": 40,
+        "rating": 4.8
+    },
+    {
+        "id": 6,
+        "nombre": "Colador de Acero Inoxidable",
+        "descripcion": "Colador ideal para pasta y verduras.",
+        "precio": 3500.0,
+        "imagen": null,
+        "categoria": "Utensilios",
+        "stock": 30,
+        "rating": 4.7
+    },
+    {
+        "id": 7,
+        "nombre": "Sartén Antiadherente",
+        "descripcion": "Sartén antiadherente de 12 pulgadas para cocinar fácilmente.",
+        "precio": 7500.0,
+        "imagen": null,
+        "categoria": "Sartenes y Ollas",
+        "stock": 35,
+        "rating": 4.4
+    },
+    {
+        "id": 8,
+        "nombre": "Juego de Ollas de Cerámica",
+        "descripcion": "Juego de 10 piezas de ollas y sartenes de cerámica antiadherente.",
+        "precio": 40000.0,
+        "imagen": null,
+        "categoria": "Sartenes y Ollas",
+        "stock": 8,
+        "rating": 4.6
+    },
+    {
+        "id": 9,
+        "nombre": "Termómetro Digital para Carnes",
+        "descripcion": "Termómetro de lectura rápida para temperaturas de cocción perfectas.",
+        "precio": 2500.0,
+        "imagen": null,
+        "categoria": "Accesorios",
+        "stock": 50,
+        "rating": 4.2
+    },
+    {
+        "id": 10,
+        "nombre": "Rallador de Queso",
+        "descripcion": "Rallador de queso de acero inoxidable.",
+        "precio": 1800.0,
+        "imagen": null,
+        "categoria": "Accesorios",
+        "stock": 20,
+        "rating": 4.5
+    },
+    {
+        "id": 11,
+        "nombre": "Cafetera Francesa",
+        "descripcion": "Cafetera francesa clásica para una taza de café perfecta.",
+        "precio": 8000.0,
+        "imagen": null,
+        "categoria": "Café",
+        "stock": 25,
+        "rating": 4.6
+    },
+    {
+        "id": 12,
+        "nombre": "Molino de Café Eléctrico",
+        "descripcion": "Molino de café con múltiples configuraciones de molienda.",
+        "precio": 4500.0,
+        "imagen": null,
+        "categoria": "Café",
+        "stock": 15,
+        "rating": 4.7
+    },
+    {
+        "id": 13,
+        "nombre": "Juego de Platos de Cerámica",
+        "descripcion": "Juego de 12 platos de cerámica colorida.",
+        "precio": 18000.0,
+        "imagen": null,
+        "categoria": "Vajilla",
+        "stock": 10,
+        "rating": 4.4
+    },
+    {
+        "id": 14,
+        "nombre": "Tazas de Café de Porcelana",
+        "descripcion": "Juego de 6 tazas de café de porcelana.",
+        "precio": 12000.0,
+        "imagen": null,
+        "categoria": "Vajilla",
+        "stock": 20,
+        "rating": 4.5
+    },
+    {
+        "id": 15,
+        "nombre": "Juego de Cubiertos de Acero Inoxidable",
+        "descripcion": "Juego de 24 cubiertos de acero inoxidable.",
+        "precio": 25000.0,
+        "imagen": null,
+        "categoria": "Cubiertos",
+        "stock": 12,
+        "rating": 4.8
+    },
+    {
+        "id": 16,
+        "nombre": "Cucharas Medidoras",
+        "descripcion": "Juego de cucharas medidoras de acero inoxidable.",
+        "precio": 1200.0,
+        "imagen": null,
+        "categoria": "Cubiertos",
+        "stock": 40,
+        "rating": 4.3
+    },
+    {
+        "id": 17,
+        "nombre": "Contenedor Hermético",
+        "descripcion": "Contenedor hermético de vidrio para almacenar alimentos.",
+        "precio": 3000.0,
+        "imagen": null,
+        "categoria": "Contenedores y Almacenamiento",
+        "stock": 30,
+        "rating": 4.5
+    },
+    {
+        "id": 18,
+        "nombre": "Juego de Tuppers",
+        "descripcion": "Juego de 6 tuppers de diferentes tamaños.",
+        "precio": 4000.0,
+        "imagen": null,
+        "categoria": "Contenedores y Almacenamiento",
+        "stock": 25,
+        "rating": 4.6
+    },
+    {
+        "id": 19,
+        "nombre": "Esponjas de Cocina",
+        "descripcion": "Paquete de 10 esponjas de cocina.",
+        "precio": 800.0,
+        "imagen": null,
+        "categoria": "Limpieza",
+        "stock": 100,
+        "rating": 4.5
+    },
+    {
+        "id": 20,
+        "nombre": "Detergente para Platos",
+        "descripcion": "Botella de 500 ml de detergente para platos.",
+        "precio": 1200.0,
+        "imagen": null,
+        "categoria": "Limpieza",
+        "stock": 50,
+        "rating": 4.4
+    },
+    {
+        "id": 21,
+        "nombre": "Pelador de Verduras",
+        "descripcion": "Pelador de verduras ergonómico.",
+        "precio": 1500.0,
+        "imagen": null,
+        "categoria": "Gadgets de Cocina",
+        "stock": 60,
+        "rating": 4.6
+    },
+    {
+        "id": 22,
+        "nombre": "Prensa de Ajo",
+        "descripcion": "Prensa de ajo de acero inoxidable.",
+        "precio": 2000.0,
+        "imagen": null,
+        "categoria": "Gadgets de Cocina",
+        "stock": 45,
+        "rating": 4.8
     }
 ]
