@@ -1,18 +1,37 @@
 'use strict';
 
+import { Stock } from './clases/Stock.js';
+
 /*
- * APELLIDO, NOMBRE | APELLIDO, NOMBRE
+ * Arroyo Lautaro Alan
  */
 
-// Podria levantar los productos de un JSON o directamente estar escritos aca
+const listado = new Stock();
+const contenedor = document.getElementById('productos');
 
-let productos = [
-    // {
-    //     id: 1,
-    //     nombre: 'Producto',
-    //     descripcion: 'Descripción del producto',
-    //     precio: 0,
-    //     imagen: 'images/producto-de-ejemplo.jpg',
-    //     categoría: 'Nombre de la categoría',
-    // }
-];
+
+function mostrar(content) {
+    contenedor.replaceChildren();
+    contenedor.appendChild(content);
+}
+
+function cargarJson() {
+    console.log('cargando productos..');
+    fetch('/productos.json')
+    .then(respuesta => respuesta.json() )
+    .then(respuesta => {
+        listado.createFromJson(respuesta);
+        mostrar( listado.toHtml())
+    })
+    .catch( error => {
+        console.error('Error al cargar');
+        console.error(error);
+    })
+    .finally( console.log('carga finalizada.') );
+}
+
+window.addEventListener('DOMContentLoaded', cargarJson)
+
+
+// usar local storage
+//
