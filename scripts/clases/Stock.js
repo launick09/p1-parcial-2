@@ -39,8 +39,6 @@ export class Stock {
      */
     toHtml() {
         const list = new ElementBuilder('div').setAttributes({ class: 'row' });
-
-        console.log(this.productos);
         this.productos.forEach(producto => {
             const column = new ElementBuilder('div').setAttributes({ class: 'col-12 col-sm-6 col-md-4 col-xl-3' });
             
