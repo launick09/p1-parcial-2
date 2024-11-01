@@ -47,6 +47,12 @@ export class Producto{
                 }
             );
 
+        const infoDiv = new ElementBuilder('div').setAttributes({ class: 'd-flex justify-content-between my-1' });      
+        // stock
+        const stockElement = new ElementBuilder('p').addTextChild(`${this.stock}u disponibles`).setAttributes({ style: 'font-size: 0.7rem;' });      
+        // rating
+        const ratingElement = new ElementBuilder('p').addTextChild(`${this.rating} ★`);  
+
         // imagen
         const imageElement = new ElementBuilder('img')
             .setAttributes({
@@ -70,7 +76,7 @@ export class Producto{
         // Precio
         const priceElement = new ElementBuilder('p')
             .addTextChild(`$ ${this.precio.toFixed(2)}`)
-            .setAttributes({ class: 'text-muted text-end', style: 'font-size: 0.6rem;' });
+            .setAttributes({ class: 'text-muted text-end', style: 'font-size: 0.7rem;' });
 
         // Agregar al carrito
         const buttonElement = new ElementBuilder('button')
@@ -78,7 +84,10 @@ export class Producto{
             .setAttributes({ class: 'btn btn-sm w-100 btn-warning' });
             
         // agrego todo        
+        infoDiv.addElementChild(stockElement);
+        infoDiv.addElementChild(ratingElement);
         cardDiv.addElementChild(imageElement);
+        cardDiv.addElementChild(infoDiv);
         cardDiv.addElementChild(nameElement);
         cardDiv.addElementChild(descriptionElement);
         precioDiv.addElementChild(priceElement);
