@@ -56,6 +56,10 @@ export class Carrito {
         return this.items.reduce((total, item) => total + item.producto.precio * item.cantidad, 0);
     }
 
+    getCantidad(){
+        return this.items.reduce((total, item) => total + item.cantidad, 0);
+    }
+
     /**
      * Vacia el carrito
      */

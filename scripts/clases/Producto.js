@@ -78,11 +78,18 @@ export class Producto{
             .addTextChild(`$ ${this.precio.toFixed(2)}`)
             .setAttributes({ class: 'text-muted text-end', style: 'font-size: 0.7rem;' });
 
+        // Detalle del producto
+        const DetalleElement = new ElementBuilder('button')
+        .addTextChild('Detalle')
+        .setAttributes({ 
+            class: 'btn btn-sm w-100 btn-secondary my-1',
+            'aria-data-id': this.id
+         });
         // Agregar al carrito
         const buttonElement = new ElementBuilder('button')
             .addTextChild('Agregar al Carrito')
             .setAttributes({ 
-                class: 'btn btn-sm w-100 btn-warning',
+                class: 'btn btn-sm w-100 btn-warning my-1',
                 'aria-data-id': this.id
              });
             
@@ -94,6 +101,7 @@ export class Producto{
         cardDiv.addElementChild(nameElement);
         cardDiv.addElementChild(descriptionElement);
         precioDiv.addElementChild(priceElement);
+        precioDiv.addElementChild(DetalleElement);
         precioDiv.addElementChild(buttonElement);
         cardDiv.addElementChild(precioDiv);
         return cardDiv.getElement();
