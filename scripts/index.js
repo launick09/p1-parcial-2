@@ -50,8 +50,12 @@ function setEventos() {
         button.addEventListener('click', (e) => {
             const id = Number(button.getAttribute('aria-data-id'));
             const producto = listado.productos.find(producto => producto.id === id);
-            carrito.addItem(producto);
-            calcularCantidad();
+            try {
+                carrito.addItem(producto);
+                calcularCantidad();
+            } catch (error) {
+                alert(error);
+            }
         });
     });
 }
