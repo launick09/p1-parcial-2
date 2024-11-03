@@ -81,7 +81,10 @@ export class Producto{
         // Agregar al carrito
         const buttonElement = new ElementBuilder('button')
             .addTextChild('Agregar al Carrito')
-            .setAttributes({ class: 'btn btn-sm w-100 btn-warning' });
+            .setAttributes({ 
+                class: 'btn btn-sm w-100 btn-warning',
+                'aria-data-id': this.id
+             });
             
         // agrego todo        
         infoDiv.addElementChild(stockElement);

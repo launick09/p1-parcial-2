@@ -13,7 +13,7 @@ import { ElementBuilder } from './ElementBuilder.js';
  * Métodos:
  * - addProducto(producto): Agrega un nuevo producto al stock.
  * - toHtml(): Devuelve HTML para el stock.
- * - createFromJson(json): agrega productos de un json (array).
+ * - createFromJson(json): agrega productos de un json .
  */
 
 export class Stock {
