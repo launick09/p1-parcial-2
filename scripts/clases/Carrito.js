@@ -72,16 +72,27 @@ export class Carrito {
      * @returns {Array} - Lista de productos en el carrito con detalles de cantidad y precio.
      */
     toHtml() {
-        const modal = new ElementBuilder('div').setAttributes({ class: 'modal', tabindex: '-1', role: 'dialog' });
-        const modalDialog = new ElementBuilder('div').setAttributes({ class: 'modal-dialog', role: 'document' });
+        const modal = new ElementBuilder('div')
+            .setAttributes({ 
+                class: 'modal',
+                id: "CarritoModal",
+                tabindex: "-1" ,
+                'aria-labelledby': "CarritoModalLabel",
+                'aria-hidden': true
+            });
+        
+        const modalDialog = new ElementBuilder('div').setAttributes({ class: 'modal-dialog'});
         const modalContent = new ElementBuilder('div').setAttributes({ class: 'modal-content' });
 
         const modalHeader = new ElementBuilder('div').setAttributes({ class: 'modal-header' });
-        modalHeader.addElementChild(new ElementBuilder('h5').addTextChild('Carrito'));
+        modalHeader.addElementChild(new ElementBuilder('h5')
+            .addTextChild('Carrito'))
+            .setAttributes({ id: 'CarritoModalLabel', class:"modal-title d-flex justify-content-between container py-2" });
         
         const closeButton = new ElementBuilder('button')
-            .setAttributes({ type: 'button', class: 'close', 'data-dismiss': 'modal', 'aria-label': 'Close' })
-            .addElementChild(new ElementBuilder('span').addTextChild('×'));
+            .setAttributes({ type:"button", class:"btn btn-close", 'data-bs-dismiss':"modal" })
+            .addElementChild(new ElementBuilder('span'));
+
         modalHeader.addElementChild(closeButton);
 
         const modalBody = new ElementBuilder('div').setAttributes({ class: 'modal-body' });
@@ -99,7 +110,7 @@ export class Carrito {
         }
         const modalFooter = new ElementBuilder('div').setAttributes({ class: 'modal-footer' });
         const closeFooterButton = new ElementBuilder('button')
-            .setAttributes({ type: 'button', class: 'btn btn-secondary', 'data-dismiss': 'modal' })
+            .setAttributes({ type:"button", class:"btn btn-warning", 'data-bs-dismiss':"modal" })
             .addTextChild('Cerrar');
         modalFooter.addElementChild(closeFooterButton);
 
