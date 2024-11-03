@@ -23,8 +23,7 @@ function mostrar(content) {
 }
 
 function mostrarCarrito() {
-    contenedorCarrito.replaceChildren();
-    contenedorCarrito.appendChild( carrito.toHtml() );
+    carrito.toHtml();
 }
 
 function cargarJson() {
@@ -71,8 +70,8 @@ function calcularCantidad() {
 }
 
 window.addEventListener('DOMContentLoaded', cargarJson);
-window.addEventListener('DOMContentLoaded', mostrarCarrito);
 window.addEventListener('DOMContentLoaded', calcularCantidad);
+button.addEventListener('click', mostrarCarrito);
 
 
 // usar local storage <- para guardar el carrito

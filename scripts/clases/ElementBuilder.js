@@ -77,4 +77,66 @@ export class ElementBuilder {
     getElement() {
         return this.elemento;
     }
+
+     /**
+     * crea un modal con titulo y contenido.
+     * @param {string} titulo - el titulo del modal.
+     * @param {HTMLElement | string} contenido - el contenido.
+     * @returns {HTMLElement} -El modal.
+     */
+    createModal(titulo, contenido) {
+        const modalId = titulo.toLowerCase().replace(' ', '-');
+        const modal = new ElementBuilder('div').setAttributes({
+            class: 'modal fade',
+            id: modalId,
+            'aria-labelledby': modalId + "Label",
+            'data-bs-backdrop': "static",
+            'data-bs-keyboard': "false"
+        });
+
+        const modalDialog = new ElementBuilder('div').setAttributes({ class: 'modal-dialog' });
+        const modalContent = new ElementBuilder('div').setAttributes({ class: 'modal-content' });
+
+        const modalHeader = new ElementBuilder('div').setAttributes({ class: 'modal-header' });
+        modalHeader.addElementChild(new ElementBuilder('h5').addTextChild(titulo)).setAttributes({
+            id: modalId + "Label",
+            class: "modal-title d-flex justify-content-between container py-2"
+        });
+
+        const closeButton = new ElementBuilder('button')
+            .setAttributes({ type: "button", class: "btn-close", 'data-bs-dismiss': "modal" })
+            .addElementChild(new ElementBuilder('span').addTextChild(''));
+
+        modalHeader.addElementChild(closeButton);
+
+        const modalBody = new ElementBuilder('div').setAttributes({ class: 'modal-body' });
+        if (typeof contenido === 'string') {
+            modalBody.addTextChild(contenido);
+        } else if (contenido instanceof HTMLElement) {
+            modalBody.addElementChild(contenido);
+        }
+
+        const modalFooter = new ElementBuilder('div').setAttributes({ class: 'modal-footer' });
+        const closeFooterButton = new ElementBuilder('button')
+            .setAttributes({ type: "button", class: "btn btn-warning", 'data-bs-dismiss': "modal" })
+            .addTextChild('Cerrar');
+
+        modalFooter.addElementChild(closeFooterButton);
+
+        modalContent.addElementChild(modalHeader);
+        modalContent.addElementChild(modalBody);
+        modalContent.addElementChild(modalFooter);
+        modalDialog.addElementChild(modalContent);
+        modal.addElementChild(modalDialog);
+
+        
+        // que dolor de cabeza
+        // lo saque de aca: https://getbootstrap.com/docs/5.3/components/modal/#via-javascript
+
+        document.body.appendChild(modal.getElement());
+        const modalInstance = new bootstrap.Modal(modal.getElement());
+        modalInstance.show();
+
+        return modal.getElement();
+    }
 }

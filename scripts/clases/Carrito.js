@@ -72,54 +72,15 @@ export class Carrito {
      * @returns {Array} - Lista de productos en el carrito con detalles de cantidad y precio.
      */
     toHtml() {
-        const modal = new ElementBuilder('div')
-            .setAttributes({ 
-                class: 'modal',
-                id: "CarritoModal",
-                tabindex: "-1" ,
-                'aria-labelledby': "CarritoModalLabel",
-                'aria-hidden': true
-            });
-        
-        const modalDialog = new ElementBuilder('div').setAttributes({ class: 'modal-dialog'});
-        const modalContent = new ElementBuilder('div').setAttributes({ class: 'modal-content' });
-
-        const modalHeader = new ElementBuilder('div').setAttributes({ class: 'modal-header' });
-        modalHeader.addElementChild(new ElementBuilder('h5')
-            .addTextChild('Carrito'))
-            .setAttributes({ id: 'CarritoModalLabel', class:"modal-title d-flex justify-content-between container py-2" });
-        
-        const closeButton = new ElementBuilder('button')
-            .setAttributes({ type:"button", class:"btn btn-close", 'data-bs-dismiss':"modal" })
-            .addElementChild(new ElementBuilder('span'));
-
-        modalHeader.addElementChild(closeButton);
-
-        const modalBody = new ElementBuilder('div').setAttributes({ class: 'modal-body' });
-
-        if (this.items.length === 0) {
-            modalBody.addTextChild('Tu carrito está vacío.');
-        } else {
-            const cartList = new ElementBuilder('ul');
-            this.items.forEach(item => {
-                const listItem = new ElementBuilder('li')
-                    .addTextChild(`${item.nombre} - Cantidad: ${item.stock}`);
-                cartList.addElementChild(listItem);
-            });
-            modalBody.addElementChild(cartList);
+        let modalContent = null;
+        if(this.items.length === 0){
+            modalContent = 'Tu carrito está vacío. :)';
+        }else{
+            //TODO: generar lista
+            modalContent = this.items.map(item => `${item.producto.nombre} - Cantidad: ${item.cantidad}`);
         }
-        const modalFooter = new ElementBuilder('div').setAttributes({ class: 'modal-footer' });
-        const closeFooterButton = new ElementBuilder('button')
-            .setAttributes({ type:"button", class:"btn btn-warning", 'data-bs-dismiss':"modal" })
-            .addTextChild('Cerrar');
-        modalFooter.addElementChild(closeFooterButton);
+        const modal = new ElementBuilder('div').createModal('CarritoModal', modalContent)
 
-        modalContent.addElementChild(modalHeader);
-        modalContent.addElementChild(modalBody);
-        modalContent.addElementChild(modalFooter);
-        modalDialog.addElementChild(modalContent);
-        modal.addElementChild(modalDialog);
-
-        return modal.getElement();
+        return modal;
     }
 }
