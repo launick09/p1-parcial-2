@@ -86,13 +86,21 @@ export class Carrito {
                     .setAttributes({ class: 'fw-bold h5' });
 
                 const productPrice = new ElementBuilder('p')
-                    .addTextChild(`${item.cantidad} ${item.cantidad >= 2 ? 'unidades' : 'unidad'}.  precio: $${item.producto.precio * item.cantidad}`)
+                    .addTextChild(`${item.cantidad} ${item.cantidad >= 2 ? 'unidades' : 'unidad'}. $${item.producto.precio}.`)
                     .setAttributes({ class: 'text-primary text-end' });
+
+                let productTotal = null;
+                if(item.cantidad >= 2){
+                    productTotal = new ElementBuilder('p')
+                        .addTextChild(`Total: $${item.producto.precio * item.cantidad}.`)
+                        .setAttributes({ class: 'text-primary fw-bold text-end' });
+                }
 
                 const modalContent = new ElementBuilder('div')
                     .setAttributes({class: 'col-9 col-md-10 m-auto'})
                     .addElementChild(productName)
                     .addElementChild(productPrice)
+                    .addElementChild(productTotal ?? '')
                 const imgContent = new ElementBuilder('div')
                     .setAttributes({class: 'col-3 col-md-2'})
                     .addElementChild(productImage)

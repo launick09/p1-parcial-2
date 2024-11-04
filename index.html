@@ -18,9 +18,9 @@
     </head>
 
     <body class="d-flex flex-column grow" style="min-height: 100vh !important;">
-        <header>
+        <header class="border-bottom border-warning">
             <!-- Reemplazar por los datos que correspondan -->
-            <nav class="navbar py-3 navbar-expand-lg border-bottom border-warning bg-light" style="background-color: #e3f2fd;">
+            <nav class="navbar py-3 navbar-expand-lg bg-light" style="background-color: #e3f2fd;">
                 <div class="container">
                     <a class="navbar-brand text-dark" href="#">Programación I | Parcial 2 | ARROYO</a>
                     <button id="comprar" class="btn position-relative" style="outline:none; box-shadow: none; padding: 0;">
@@ -31,6 +31,21 @@
                     </button>
                 </div>
             </nav>
+            <div class="navbar py-1 navbar-expand-lg bg-light">
+                <div class="container">
+                    <div id="filtros">
+                        <label for="filtro-rango-min">Rango de precio:</label>
+                        <div class="row">
+                            <div class="col-6">
+                                <input class="form-control" type="number" min="0" id="filtro-rango-min" placeholder="Mínimo">
+                            </div>
+                            <div class="col-6">
+                                <input class="form-control" type="number" min="0" id="filtro-rango-max" placeholder="Máximo">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </header>
         <main class="flex-grow-1 my-2">
             <div class="container">

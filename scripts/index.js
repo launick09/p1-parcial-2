@@ -44,6 +44,18 @@ function cargarJson() {
     .finally( console.log('carga finalizada.') );
 }
 
+function filtrarProductos() {
+    const rangoMin = Number(document.getElementById('filtro-rango-min').value) || 0;
+    const rangoMax = Number(document.getElementById('filtro-rango-max').value) || Infinity;
+
+    const productos = listado.productos.filter(producto =>  
+        parseFloat(producto.precio) >= parseFloat(rangoMin) &&
+        parseFloat(producto.precio) <= parseFloat(rangoMax)
+    );
+
+
+    mostrar(listado.toHtml(productos));
+}
 
 function setEventos() {
     //funcionar, funciona
@@ -82,6 +94,10 @@ function calcularCantidad() {
 
 window.addEventListener('DOMContentLoaded', cargarJson);
 window.addEventListener('DOMContentLoaded', calcularCantidad);
+document.querySelectorAll('#filtros input').forEach(input => {
+    input.addEventListener('input', filtrarProductos);
+});
+
 button.addEventListener('click', mostrarCarrito);
 
 
