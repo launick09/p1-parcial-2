@@ -116,9 +116,9 @@ export class Producto{
                 // style: 'max-width: 300px;' 
             });
 
-        const productName = new ElementBuilder('h5')
+        const productName = new ElementBuilder('p')
             .addTextChild(producto.nombre)
-            .setAttributes({ class: 'fw-bold' });
+            .setAttributes({ class: 'fw-bold h5' });
 
         const productDescription = new ElementBuilder('p')
             .addTextChild(producto.descripcion)

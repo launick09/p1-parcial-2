@@ -81,9 +81,9 @@ export class Carrito {
                 const productImage = new ElementBuilder('img')
                     .setAttributes({ src: item.producto.imagen, alt: item.producto.nombre, class: 'img-fluid mb-3' });
 
-                const productName = new ElementBuilder('h5')
+                const productName = new ElementBuilder('h3')
                     .addTextChild(item.producto.nombre)
-                    .setAttributes({ class: 'fw-bold' });
+                    .setAttributes({ class: 'fw-bold h5' });
 
                 const productPrice = new ElementBuilder('p')
                     .addTextChild(`${item.cantidad} ${item.cantidad >= 2 ? 'unidades' : 'unidad'}.  precio: $${item.producto.precio * item.cantidad}`)
@@ -105,13 +105,13 @@ export class Carrito {
                 return rowContent.getElement();
             });
 
-            const totalTitle = new ElementBuilder('h5')
+            const totalTitle = new ElementBuilder('p')
                 .addTextChild('Facturación:')
-                .setAttributes({ class: 'fw-bold' });
+                .setAttributes({ class: 'fw-bold h5 my-0' });
 
             const priceTotal = new ElementBuilder('p')
                 .addTextChild(`${this.getCantidad()} ${this.getCantidad() >= 2 ? 'unidades' : 'unidad'}. Total: $${this.getTotal()}`)
-                .setAttributes({ class: 'text-primary text-end' });
+                .setAttributes({ class: 'text-primary h5 text-end my-0' });
 
             const Row = new ElementBuilder('div')
                 .setAttributes({ class: 'd-flex justify-content-between my-1' })
