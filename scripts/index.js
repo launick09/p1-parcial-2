@@ -16,7 +16,7 @@ const button = document.getElementById('comprar');
 const cantidad = document.getElementById('comprar-cantidad');
 
 const contenedor = document.getElementById('productos');
-const contenedorCarrito = document.getElementById('carrito');
+const categorias = document.getElementById('categoria');
 
 
 function mostrar(content) {
@@ -36,6 +36,7 @@ function cargarJson() {
     .then(respuesta => {
         listado.createFromJson(respuesta);
         mostrar( listado.toHtml())
+        listado.setOptionsCategorias(categorias);
     })
     .catch( error => {
         console.error('Error al cargar');
@@ -47,12 +48,13 @@ function cargarJson() {
 function filtrarProductos() {
     const rangoMin = Number(document.getElementById('filtro-rango-min').value) || 0;
     const rangoMax = Number(document.getElementById('filtro-rango-max').value) || Infinity;
+    const categoria = String(document.getElementById('categoria').value) || null;
 
     const productos = listado.productos.filter(producto =>  
         parseFloat(producto.precio) >= parseFloat(rangoMin) &&
-        parseFloat(producto.precio) <= parseFloat(rangoMax)
+        parseFloat(producto.precio) <= parseFloat(rangoMax) &&
+        categoria ? producto.categoria === categoria : true
     );
-
 
     mostrar(listado.toHtml(productos));
 }
@@ -94,12 +96,12 @@ function calcularCantidad() {
 
 window.addEventListener('DOMContentLoaded', cargarJson);
 window.addEventListener('DOMContentLoaded', calcularCantidad);
-document.querySelectorAll('#filtros input').forEach(input => {
+
+document.querySelectorAll('#filtros .change').forEach(input => {
     input.addEventListener('input', filtrarProductos);
 });
 
 button.addEventListener('click', mostrarCarrito);
-
 
 // usar local storage <- para guardar el carrito
 //
