@@ -40,12 +40,10 @@ export class Producto{
      */
     toHtml(){
         const cardDiv = new ElementBuilder('div')
-            .setAttributes(
-                { 
-                    class: 'card border-0 m-auto p-2 h-100 d-flex', 
-                    style: 'max-width: 400px;' 
-                }
-            );
+            .setAttributes({ 
+                class: 'card border-0 m-auto p-2 h-100 d-flex', 
+                style: 'max-width: 400px;' 
+            });
 
         const infoDiv = new ElementBuilder('div').setAttributes({ class: 'd-flex justify-content-between my-1' });      
         // stock
@@ -64,14 +62,23 @@ export class Producto{
             });
 
         // nombre del producto
-        const nameElement = new ElementBuilder('h3').addTextChild(this.nombre);      
+        const nameElement = new ElementBuilder('h3')
+            .addTextChild(this.nombre)
+            .setAttributes({
+                class: 'text-truncate',
+                title: this.nombre
+            });      
 
         // descripcion
+        const categoryElement = new ElementBuilder('p')
+            .addTextChild(this.categoria)
+            .setAttributes({ class: 'text-muted badge text-start p-0' });
         const descriptionElement = new ElementBuilder('p')
             .addTextChild(this.descripcion)
             .setAttributes({ class: 'text-muted' });
         
-        const precioDiv = new ElementBuilder('div').setAttributes({ class: 'mt-auto' });
+        const precioDiv = new ElementBuilder('div')
+            .setAttributes({ class: 'mt-auto' });
 
         // Precio
         const priceElement = new ElementBuilder('p')
@@ -93,12 +100,14 @@ export class Producto{
                 'aria-data-id': this.id
              });
             
+             
         // agrego todo        
         infoDiv.addElementChild(stockElement);
         infoDiv.addElementChild(ratingElement);
         cardDiv.addElementChild(imageElement);
         cardDiv.addElementChild(infoDiv);
         cardDiv.addElementChild(nameElement);
+        cardDiv.addElementChild(categoryElement);
         cardDiv.addElementChild(descriptionElement);
         precioDiv.addElementChild(priceElement);
         precioDiv.addElementChild(DetalleElement);
@@ -120,6 +129,10 @@ export class Producto{
             .addTextChild(producto.nombre)
             .setAttributes({ class: 'fw-bold h5' });
 
+        const productCategory = new ElementBuilder('p')
+            .addTextChild(producto.categoria)
+            .setAttributes({ class: 'text-muted' });
+
         const productDescription = new ElementBuilder('p')
             .addTextChild(producto.descripcion)
             .setAttributes({ class: 'text-muted' });
@@ -135,9 +148,11 @@ export class Producto{
         const imgContent = new ElementBuilder('div')
             .setAttributes({ class: 'col-12 col-md-4' })
             .addElementChild(productImage)
+
         const modalContent = new ElementBuilder('div')
             .setAttributes({ class: 'col-12 col-md-8' })
             .addElementChild(productName)
+            .addElementChild(productCategory)
             .addElementChild(productDescription)
             .addElementChild(productPrice)
             .addElementChild(productRating);
