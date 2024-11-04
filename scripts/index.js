@@ -31,7 +31,8 @@ function mostrarCarrito() {
 
 function cargarJson() {
     console.log('cargando productos..');
-    fetch('/productos.json')
+    // fetch('/productos.json')
+    fetch('https://launick09.github.io/p1-parcial-2/productos.json')
     .then(respuesta => respuesta.json() )
     .then(respuesta => {
         listado.createFromJson(respuesta);
