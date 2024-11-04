@@ -31,3 +31,7 @@ html {
     font-family: 'Archivo', sans-serif;
     font-weight: 400;
 }
+
+.btn{
+    box-shadow: none !important;
+}

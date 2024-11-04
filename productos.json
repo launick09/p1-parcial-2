@@ -228,5 +228,15 @@
         "categoria": "Gadgets de Cocina",
         "stock": 45,
         "rating": 4.8
+    },
+    {
+        "id": 23,
+        "nombre": "Sable de Acero",
+        "descripcion": "Sable tradicional de la dinastía Qing. hoja de acero 1095 forjada a mano, con filo. cordón de color rojo. largo total: 91 cm (hoja de 70 cm.). peso: 1250 gramos desenvainado /// 1917 g. con la vaina - medidas y peso aproximados -",
+        "precio": 650000.0,
+        "imagen": "https://http2.mlstatic.com/D_NQ_NP_858990-MLA74805685623_022024-O.webphttps://http2.mlstatic.com/D_NQ_NP_858990-MLA74805685623_022024-O.webp",
+        "categoria": "Accesorios",
+        "stock": 0,
+        "rating": 2
     }
 ]

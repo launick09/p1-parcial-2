@@ -152,7 +152,6 @@ export class ElementBuilder {
             if (typeof item == 'string') {
                 listItem.textContent = item;
             } else if (item instanceof HTMLElement) {
-                console.log(listItem);
                 listItem.addElementChild(item);
             }
             listElement.addElementChild(listItem);

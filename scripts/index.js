@@ -51,11 +51,11 @@ function filtrarProductos() {
     const rangoMax = Number(document.getElementById('filtro-rango-max').value) || Infinity;
     const categoria = String(document.getElementById('categoria').value) || null;
 
-    const productos = listado.productos.filter(producto =>  
-        parseFloat(producto.precio) >= parseFloat(rangoMin) &&
-        parseFloat(producto.precio) <= parseFloat(rangoMax) &&
-        categoria ? producto.categoria === categoria : true
-    );
+    const productos = listado.productos.filter(producto => {
+        const estaEnRango = producto.precio >= rangoMin && producto.precio <= rangoMax;
+        const estaEnCategoria = categoria ? producto.categoria === categoria : true;
+        return estaEnRango && estaEnCategoria;
+    });
 
     mostrar(listado.toHtml(productos));
 }

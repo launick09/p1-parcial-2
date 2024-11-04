@@ -33,7 +33,7 @@
             </nav>
             <div class="navbar py-1 navbar-expand-lg bg-light">
                 <div class="container">
-                    <div id="filtros" class="d-flex flex-wrap" style="gap:1rem">
+                    <div id="filtros" class="d-flex flex-wrap align-items-center w-100" style="gap:1rem">
                         <div class="rango">
                             <label for="filtro-rango-min">Rango de precio:</label>
                             <div class="row">
@@ -49,6 +49,14 @@
                             <label for="categoria">Categoria:</label>
                             <select class="form-control form-control-sm change" name="categoria" id="categoria">
                                 <option value="">Todas</option>
+                            </select>
+                        </div>
+                        <div class="ms-auto d-flex">
+                            <span class="btn disabled">ordernar por: </span>
+                            <select class="p-0 btn text-start" name="categoria" id="categoria">
+                                <option value="">Stock</option>
+                                <option value="">Mayor Precio</option>
+                                <option value="">Menor Precio</option>
                             </select>
                         </div>
                     </div>

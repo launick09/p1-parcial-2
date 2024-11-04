@@ -53,12 +53,7 @@ export class Stock {
     }
 
     setOptionsCategorias(contenedor){
-        console.log(contenedor);
-        
         const categorias = new Set(this.productos.map(p => p.categoria).filter(Boolean));
-
-        console.log(categorias);
-        
         categorias.forEach(categoria => {
             const option = new ElementBuilder('option').setAttributes({ value: categoria }).addTextChild(categoria)
             contenedor.appendChild(option.getElement())
