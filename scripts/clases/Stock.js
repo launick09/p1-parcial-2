@@ -33,6 +33,37 @@ export class Stock {
         }
     }
 
+
+    /**
+     * @param {String | null} criterio - ordena los productos en stock
+     * (rating, más stock, menos stock, mayor precio, menor precio)
+     * @returns 
+     */
+    sortStock(criterio = null) {
+        //TODO: usar copia
+        switch (criterio) {
+            case 'rating':
+                this.productos.sort((a, b) => b.rating - a.rating);
+                break;
+            case 'más stock':
+                this.productos.sort((a, b) => b.stock - a.stock);
+                break;
+            case 'menos stock':
+                this.productos.sort((a, b) => a.stock - b.stock);
+                break;
+            case 'mayor precio':
+                this.productos.sort((a, b) => a.precio - b.precio);
+                break;
+            case 'menor precio':
+                this.productos.sort((a, b) => b.precio - a.precio);
+                break;
+            default:
+                this.productos.sort((a, b) => b.rating - a.rating);
+                break;
+        }
+        return this.productos;
+    }
+
     /**
      * Devuelve HTML para el stock.
      * @returns {HTMLElement} - Elemento HTML que contiene todos los productos.
@@ -52,6 +83,11 @@ export class Stock {
         return list.getElement();
     }
 
+
+    /**
+     * @param {HTMLElement} contenedor - select al cual adjuntar las opciones
+     * sirve para no poner los elementos manualmente 
+     */
     setOptionsCategorias(contenedor){
         const categorias = new Set(this.productos.map(p => p.categoria).filter(Boolean));
         categorias.forEach(categoria => {

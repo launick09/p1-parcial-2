@@ -17,7 +17,7 @@ const cantidad = document.getElementById('comprar-cantidad');
 
 const contenedor = document.getElementById('productos');
 const categorias = document.getElementById('categoria');
-
+const orden = document.getElementById('orden');
 
 function mostrar(content) {
     contenedor.replaceChildren();
@@ -36,6 +36,7 @@ function cargarJson() {
     .then(respuesta => respuesta.json() )
     .then(respuesta => {
         listado.createFromJson(respuesta);
+        listado.sortStock();
         mostrar( listado.toHtml())
         listado.setOptionsCategorias(categorias);
     })
@@ -100,6 +101,11 @@ window.addEventListener('DOMContentLoaded', calcularCantidad);
 
 document.querySelectorAll('#filtros .change').forEach(input => {
     input.addEventListener('input', filtrarProductos);
+});
+
+orden.addEventListener('change', () => {
+    const productos = listado.sortStock(orden.value);
+    mostrar(listado.toHtml(productos));
 });
 
 button.addEventListener('click', mostrarCarrito);
