@@ -106,42 +106,8 @@ export class Producto{
         cardDiv.addElementChild(precioDiv);
         return cardDiv.getElement();
     }
-
-    getInfo(producto){
-        const productImage = new ElementBuilder('img')
-            .setAttributes({ src: producto.imagen, alt: producto.nombre, class: 'img-fluid mb-3' });
-
-        const productName = new ElementBuilder('h5')
-            .addTextChild(producto.nombre)
-            .setAttributes({ class: 'fw-bold' });
-
-        const productDescription = new ElementBuilder('p')
-            .addTextChild(producto.descripcion)
-            .setAttributes({ class: 'text-muted' });
-
-        const productPrice = new ElementBuilder('p')
-            .addTextChild(`Price: $${producto.precio}`)
-            .setAttributes({ class: 'text-primary' });
-
-        const productRating = new ElementBuilder('p')
-            .addTextChild(`Rating: ${producto.rating}★`)
-            .setAttributes({ class: 'text-warning' });
-
-        const modalContent = new ElementBuilder('div')
-            .addElementChild(productImage)
-            .addElementChild(productName)
-            .addElementChild(productDescription)
-            .addElementChild(productPrice)
-            .addElementChild(productRating);
-
-        // Create and show the modal using createModal with title and content
-        const modal = new ElementBuilder('div').createModal('Product Information', modalContent.getElement());
-        document.body.appendChild(modal);
-    }
     
-    getInfo(producto){
-        console.log(producto);
-        
+    getInfo(producto){        
         const productImage = new ElementBuilder('img')
             .setAttributes({ 
                 src: producto.imagen,

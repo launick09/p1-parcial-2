@@ -58,7 +58,6 @@ export class ElementBuilder {
     }
 
     /**
-     * 
      * @param {ElementBuilder} hijo 
      * @returns {ElementBuilder} - elemento con hijo
      */
@@ -84,7 +83,7 @@ export class ElementBuilder {
      * @param {HTMLElement | string} contenido - el contenido.
      * @returns {HTMLElement} -El modal.
      */
-    createModal(titulo, contenido) {
+    createModal(titulo = 'modal', contenido) {
         const modalId = titulo.toLowerCase().replace(' ', '-');
         const modal = new ElementBuilder('div').setAttributes({
             class: 'modal fade',
@@ -94,15 +93,15 @@ export class ElementBuilder {
             'data-bs-keyboard': "false"
         });
 
-        const modalDialog = new ElementBuilder('div').setAttributes({ class: 'modal-dialog' });
+        const modalDialog = new ElementBuilder('div').setAttributes({ class: 'modal-dialog modal-lg' });
         const modalContent = new ElementBuilder('div').setAttributes({ class: 'modal-content' });
-
+        // header
         const modalHeader = new ElementBuilder('div').setAttributes({ class: 'modal-header' });
         modalHeader.addElementChild(new ElementBuilder('h5').addTextChild(titulo)).setAttributes({
             id: modalId + "Label",
             class: "modal-title d-flex justify-content-between container py-2"
         });
-
+        // contenido
         const closeButton = new ElementBuilder('button')
             .setAttributes({ type: "button", class: "btn-close", 'data-bs-dismiss': "modal" })
             .addElementChild(new ElementBuilder('span').addTextChild(''));
@@ -115,7 +114,7 @@ export class ElementBuilder {
         } else if (contenido instanceof HTMLElement) {
             modalBody.addElementChild(contenido);
         }
-
+        // footer
         const modalFooter = new ElementBuilder('div').setAttributes({ class: 'modal-footer' });
         const closeFooterButton = new ElementBuilder('button')
             .setAttributes({ type: "button", class: "btn btn-warning", 'data-bs-dismiss': "modal" })
@@ -138,5 +137,26 @@ export class ElementBuilder {
         modalInstance.show();
 
         return modal.getElement();
+    }
+
+    /**
+     * 
+     * @param {Array<string | HTMLElement>} contenido - un array con los elementos
+     * @param {string} list - define tipo de lista
+     * @returns {HTMLElement} - la lista
+     */
+    createList(contenido, list = 'ul') {
+        const listElement = new ElementBuilder(list).setAttributes({class:'list-group'});
+        contenido.forEach(item => {
+            const listItem = new ElementBuilder('li').setAttributes({class:'list-group-item'});
+            if (typeof item == 'string') {
+                listItem.textContent = item;
+            } else if (item instanceof HTMLElement) {
+                console.log(listItem);
+                listItem.addElementChild(item);
+            }
+            listElement.addElementChild(listItem);
+        });
+        return listElement;
     }
 }
