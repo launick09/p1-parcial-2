@@ -2,6 +2,7 @@
 
 import { Stock } from './clases/Stock.js';
 import { Carrito } from './clases/Carrito.js';
+import { Producto } from './clases/Producto.js';
 
 /*
  * Arroyo Lautaro Alan
@@ -9,6 +10,8 @@ import { Carrito } from './clases/Carrito.js';
 
 const listado = new Stock();
 const carrito = new Carrito();
+const producto = new Producto();
+
 const button = document.getElementById('comprar');
 const cantidad = document.getElementById('comprar-cantidad');
 
@@ -44,8 +47,8 @@ function cargarJson() {
 
 function setEventos() {
     //funcionar, funciona
-    const buttons = document.querySelectorAll('button[aria-data-id]');
-    buttons.forEach(button => {
+    const Addbuttons = document.querySelectorAll('button[aria-data-id]');
+    Addbuttons.forEach(button => {
         button.addEventListener('click', (e) => {
             const id = Number(button.getAttribute('aria-data-id'));
             const producto = listado.productos.find(producto => producto.id === id);
@@ -55,6 +58,14 @@ function setEventos() {
             } catch (error) {
                 alert(error);
             }
+        });
+    });
+    const buttons = document.querySelectorAll('button[aria-info-id]');
+    buttons.forEach(button => {
+        button.addEventListener('click', () => {
+            const id = Number(button.getAttribute('aria-info-id'));
+            const item = listado.productos.find(producto => producto.id === id);
+            producto.getInfo(item);
         });
     });
 }

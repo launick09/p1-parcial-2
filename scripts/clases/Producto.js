@@ -83,7 +83,7 @@ export class Producto{
         .addTextChild('Detalle')
         .setAttributes({ 
             class: 'btn btn-sm w-100 btn-secondary my-1',
-            'aria-data-id': this.id
+            'aria-info-id': this.id
          });
         // Agregar al carrito
         const buttonElement = new ElementBuilder('button')
@@ -105,6 +105,83 @@ export class Producto{
         precioDiv.addElementChild(buttonElement);
         cardDiv.addElementChild(precioDiv);
         return cardDiv.getElement();
+    }
+
+    getInfo(producto){
+        const productImage = new ElementBuilder('img')
+            .setAttributes({ src: producto.imagen, alt: producto.nombre, class: 'img-fluid mb-3' });
+
+        const productName = new ElementBuilder('h5')
+            .addTextChild(producto.nombre)
+            .setAttributes({ class: 'fw-bold' });
+
+        const productDescription = new ElementBuilder('p')
+            .addTextChild(producto.descripcion)
+            .setAttributes({ class: 'text-muted' });
+
+        const productPrice = new ElementBuilder('p')
+            .addTextChild(`Price: $${producto.precio}`)
+            .setAttributes({ class: 'text-primary' });
+
+        const productRating = new ElementBuilder('p')
+            .addTextChild(`Rating: ${producto.rating}★`)
+            .setAttributes({ class: 'text-warning' });
+
+        const modalContent = new ElementBuilder('div')
+            .addElementChild(productImage)
+            .addElementChild(productName)
+            .addElementChild(productDescription)
+            .addElementChild(productPrice)
+            .addElementChild(productRating);
+
+        // Create and show the modal using createModal with title and content
+        const modal = new ElementBuilder('div').createModal('Product Information', modalContent.getElement());
+        document.body.appendChild(modal);
+    }
+    
+    getInfo(producto){
+        console.log(producto);
+        
+        const productImage = new ElementBuilder('img')
+            .setAttributes({ 
+                src: producto.imagen,
+                alt: producto.nombre, 
+                class: 'img-fluid mb-3',
+                // style: 'max-width: 300px;' 
+            });
+
+        const productName = new ElementBuilder('h5')
+            .addTextChild(producto.nombre)
+            .setAttributes({ class: 'fw-bold' });
+
+        const productDescription = new ElementBuilder('p')
+            .addTextChild(producto.descripcion)
+            .setAttributes({ class: 'text-muted' });
+
+        const productPrice = new ElementBuilder('p')
+            .addTextChild(`Price: $${producto.precio}`)
+            .setAttributes({ class: 'text-primary' });
+
+        const productRating = new ElementBuilder('p')
+            .addTextChild(`Rating: ${producto.rating}★`)
+            .setAttributes({ class: 'text-warning' });
+
+        const imgContent = new ElementBuilder('div')
+            .setAttributes({ class: 'col-12 col-md-4' })
+            .addElementChild(productImage)
+        const modalContent = new ElementBuilder('div')
+            .setAttributes({ class: 'col-12 col-md-8' })
+            .addElementChild(productName)
+            .addElementChild(productDescription)
+            .addElementChild(productPrice)
+            .addElementChild(productRating);
+
+        const rowContent = new ElementBuilder('div')
+            .setAttributes({ class: 'row' })
+            .addElementChild(imgContent)
+            .addElementChild(modalContent)
+
+        return new ElementBuilder('div').createModal( producto.nombre , rowContent.getElement());
     }
 
 }
