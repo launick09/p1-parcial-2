@@ -77,6 +77,13 @@ export class ElementBuilder {
         return this.elemento;
     }
 
+    removeElement(elemento){
+        const target = elemento instanceof ElementBuilder ? elemento.getElement(): elemento;
+        if (target && target.parentNode) {
+            target.parentNode.removeChild(target);
+        }
+    }
+
      /**
      * crea un modal con titulo y contenido.
      * @param {string} titulo - el titulo del modal.
@@ -85,6 +92,16 @@ export class ElementBuilder {
      */
     createModal(titulo = 'modal', contenido) {
         const modalId = titulo.toLowerCase().replace(' ', '-');
+
+        const existingModal = document.getElementById(modalId);
+        if (existingModal) {
+            const modalInstance = bootstrap.Modal.getInstance(existingModal);
+            if (modalInstance) {
+                modalInstance.hide(); // no me removia el backdrop
+            }
+            this.removeElement(existingModal);
+        }
+
         const modal = new ElementBuilder('div').setAttributes({
             class: 'modal fade',
             id: modalId,

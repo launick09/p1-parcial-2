@@ -17,10 +17,8 @@ export class Carrito {
      * Si el producto ya está en el carrito, aumenta la cantidad.
      * @param {Producto} producto - Producto a agregar.
      * @param {Number} cantidad - Cantidad a agregar.
-     * @returns {Boolean} - `true` si se pudo agregar, `false` si excede el stock permitido.
      */
     addItem(producto, cantidad = 1) {
-        
         const itemIndex = this.items.findIndex(item => item.producto.id === producto.id);
         if (itemIndex >= 0) {
             let productoAgregado = this.items[itemIndex];
@@ -33,7 +31,29 @@ export class Carrito {
                 throw new Error(`Stock insuficiente para ${producto.nombre}. ${producto.stock} unidades disponibles.`);
             }
             this.items.push({ producto, cantidad });
-            return true;
+        }
+    }
+
+    /**
+     * remueve un producto al carrito.
+     * Si el producto ya está en el carrito, aumenta la cantidad.
+     * @param {Producto} producto - Producto a remover.
+     * @param {Number} cantidad - Cantidad a remover.
+     */
+    removeItem(producto, cantidad = 1) {
+        const itemIndex = this.items.findIndex(item => item.producto.id === producto.id);
+    
+        if (itemIndex >= 0) {
+            let productoAgregado = this.items[itemIndex];
+            if (productoAgregado.cantidad < cantidad) {
+                throw new Error(`No se puede eliminar más unidades de ${producto.nombre} de las que hay en el carrito.`);
+            }
+            productoAgregado.cantidad -= cantidad;
+            if (productoAgregado.cantidad === 0) {
+                this.items.splice(itemIndex, 1);
+            }
+        } else {
+            throw new Error(`El producto ${producto.nombre} no está en el carrito.`);
         }
     }
 
@@ -81,9 +101,42 @@ export class Carrito {
                 const productImage = new ElementBuilder('img')
                     .setAttributes({ src: item.producto.imagen, alt: item.producto.nombre, class: 'img-fluid mb-3' });
 
-                const productName = new ElementBuilder('h3')
+                const productName = new ElementBuilder('p')
                     .addTextChild(item.producto.nombre)
                     .setAttributes({ class: 'fw-bold h5' });
+
+                const increaseButton = new ElementBuilder('button')
+                    .setAttributes({ 
+                        class: 'btn btn-outline-dark btn-sm increase-btn', 
+                        'aria-data-id': item.producto.id 
+                    });
+                increaseButton.addElementChild(
+                    new ElementBuilder('i').setAttributes({ class: 'fas fa-plus' }).getElement()
+                );
+
+                const decreaseButton = new ElementBuilder('button')
+                    .setAttributes({
+                        class: 'btn btn-outline-dark btn-sm decrease-btn', 
+                        'aria-data-decrease-id': item.producto.id 
+                    });
+                decreaseButton.addElementChild(
+                    new ElementBuilder('i').setAttributes({ class: 'fas fa-minus' }).getElement()
+                );
+
+                const removeButton = new ElementBuilder('button')
+                    .setAttributes({ 
+                        class: 'btn btn-outline-dark btn-sm remove-btn', 
+                        'aria-data-delete-id': item.producto.id 
+                    });
+                removeButton.addElementChild(
+                    new ElementBuilder('i').setAttributes({ class: 'fas fa-trash' }).getElement()
+                );
+
+                const buttonsContent = new ElementBuilder('div')
+                    .setAttributes({ class: 'btn-group justify-self-end' })
+                    .addElementChild(decreaseButton)
+                    .addElementChild(removeButton)
+                    .addElementChild(increaseButton);
 
                 const productPrice = new ElementBuilder('p')
                     .addTextChild(`${item.cantidad} ${item.cantidad >= 2 ? 'unidades' : 'unidad'}. $${item.producto.precio}.`)
@@ -99,6 +152,7 @@ export class Carrito {
                 const modalContent = new ElementBuilder('div')
                     .setAttributes({class: 'col-9 col-md-10 m-auto'})
                     .addElementChild(productName)
+                    .addElementChild(buttonsContent)
                     .addElementChild(productPrice)
                     .addElementChild(productTotal ?? '')
                 const imgContent = new ElementBuilder('div')

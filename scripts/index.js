@@ -26,7 +26,9 @@ function mostrar(content) {
 }
 
 function mostrarCarrito() {
-    carrito.toHtml();
+    // TODO: revisar si hay un flash o estoy cansado
+    carrito.toHtml();    
+    setEventos();   
 }
 
 function cargarJson() {
@@ -61,31 +63,6 @@ function filtrarProductos() {
     mostrar(listado.toHtml(productos));
 }
 
-function setEventos() {
-    //funcionar, funciona
-    const Addbuttons = document.querySelectorAll('button[aria-data-id]');
-    Addbuttons.forEach(button => {
-        button.addEventListener('click', (e) => {
-            const id = Number(button.getAttribute('aria-data-id'));
-            const producto = listado.productos.find(producto => producto.id === id);
-            try {
-                carrito.addItem(producto);
-                calcularCantidad();
-            } catch (error) {
-                alert(error);
-            }
-        });
-    });
-    const buttons = document.querySelectorAll('button[aria-info-id]');
-    buttons.forEach(button => {
-        button.addEventListener('click', () => {
-            const id = Number(button.getAttribute('aria-info-id'));
-            const item = listado.productos.find(producto => producto.id === id);
-            producto.getInfo(item);
-        });
-    });
-}
-
 function calcularCantidad() {
     if(carrito.getCantidad()){
         cantidad.classList.remove('d-none');
@@ -94,6 +71,65 @@ function calcularCantidad() {
         cantidad.classList.add('d-none');
     }
     
+}
+
+function setEventos() {
+    // Botones para agregar productos
+    const addButtons = document.querySelectorAll('button[aria-data-id]');
+    addButtons.forEach(button => {
+        // button.removeEventListener('click', agregarItem);
+        button.addEventListener('click', agregarItem);
+        button.addEventListener('click', mostrarCarrito);
+    });
+    // Botones para ver la información del producto
+    const infoButtons = document.querySelectorAll('button[aria-info-id]');
+    infoButtons.forEach(button => {
+        button.removeEventListener('click', verItem);
+        button.addEventListener('click', verItem);
+    });
+    // Botones para bajar la cantidad en el carrito
+    const decreaseButtons = document.querySelectorAll('button[aria-data-decrease-id]');
+    decreaseButtons.forEach(button => {
+        button.removeEventListener('click', removerItem);
+        button.addEventListener('click', removerItem);
+        button.addEventListener('click', mostrarCarrito);
+    });
+    // Botones para eliminar el producto del carrito
+    const deleteButtons = document.querySelectorAll('button[aria-data-delete-id]');
+    deleteButtons.forEach(button => {
+        button.removeEventListener('click', eliminarItem);
+        button.addEventListener('click', eliminarItem);
+        button.addEventListener('click', mostrarCarrito);
+    });
+}
+
+function agregarItem(e) {
+    const id = Number(e.currentTarget.getAttribute('aria-data-id'));
+    const producto = listado.productos.find(producto => producto.id === id);
+    try {
+        carrito.addItem(producto);
+        calcularCantidad();
+    } catch (error) {
+        alert(error);
+    }
+}
+function verItem(e) {
+    const id = Number(e.currentTarget.getAttribute('aria-info-id'));
+    const item = listado.productos.find(producto => producto.id === id);
+    producto.getInfo(item);
+}
+function removerItem(e) {
+    const id = Number(e.currentTarget.getAttribute('aria-data-decrease-id'));
+    const producto = carrito.items.find(item => item.producto.id === id);
+    if (producto) {
+        carrito.addItem(producto.producto, -1);
+        calcularCantidad();
+    }
+}
+function eliminarItem(e) {
+    const id = Number(e.currentTarget.getAttribute('aria-data-delete-id'));
+    carrito.removeItem(id);
+    calcularCantidad();
 }
 
 window.addEventListener('DOMContentLoaded', cargarJson);
