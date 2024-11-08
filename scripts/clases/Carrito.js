@@ -6,6 +6,7 @@
  */
 
 import { ElementBuilder } from './ElementBuilder.js';
+import { Producto } from './Producto.js';
 
 export class Carrito {
     constructor() {
@@ -24,14 +25,27 @@ export class Carrito {
             let productoAgregado = this.items[itemIndex];
             if (producto.stock < productoAgregado.cantidad + cantidad) {
                 throw new Error(`Stock insuficiente para ${producto.nombre}. ${producto.stock} unidades disponibles.`);
-            }
-            return productoAgregado.cantidad += cantidad;
+            }            
+            productoAgregado.cantidad += cantidad;
         } else {
             if (producto.stock < cantidad) {
                 throw new Error(`Stock insuficiente para ${producto.nombre}. ${producto.stock} unidades disponibles.`);
             }
             this.items.push({ producto, cantidad });
         }
+        this.calcularCantidad();
+        this.agregarALocalStorage();
+    }
+
+    calcularCantidad() {
+        const carrito = document.getElementById('comprar-cantidad');        
+        if(this.getCantidad()){
+            carrito.classList.remove('d-none');
+            carrito.querySelector('span').innerText = this.getCantidad();
+        }else{
+            carrito.classList.add('d-none');
+        }
+        
     }
 
     /**
@@ -42,30 +56,28 @@ export class Carrito {
      */
     removeItem(producto, cantidad = 1) {
         const itemIndex = this.items.findIndex(item => item.producto.id === producto.id);
-    
         if (itemIndex >= 0) {
             let productoAgregado = this.items[itemIndex];
-            if (productoAgregado.cantidad < cantidad) {
-                throw new Error(`No se puede eliminar más unidades de ${producto.nombre} de las que hay en el carrito.`);
-            }
-            productoAgregado.cantidad -= cantidad;
-            if (productoAgregado.cantidad === 0) {
+            if (cantidad === null) {
                 this.items.splice(itemIndex, 1);
+            } else {
+                productoAgregado.cantidad -= cantidad;
+                if (productoAgregado.cantidad <= 0) {
+                    this.items.splice(itemIndex, 1);
+                }
             }
         } else {
             throw new Error(`El producto ${producto.nombre} no está en el carrito.`);
         }
+        this.agregarALocalStorage();
     }
 
     /**
-     * Elimina un producto del carrito.
-     * @param {Number} productId - ID del producto a eliminar.
+     * Vacia el carrito
      */
-    removeItem(productId) {
-        const itemIndex = this.items.findIndex(item => item.producto.id === productId);
-        if (itemIndex >= 0) {
-            this.items.splice(itemIndex, 1);
-        }
+    clear() {
+        this.items = [];
+        this.agregarALocalStorage();
     }
 
     /**
@@ -78,13 +90,6 @@ export class Carrito {
 
     getCantidad(){
         return this.items.reduce((total, item) => total + item.cantidad, 0);
-    }
-
-    /**
-     * Vacia el carrito
-     */
-    clear() {
-        this.items = [];
     }
 
     /**
@@ -113,6 +118,7 @@ export class Carrito {
                 increaseButton.addElementChild(
                     new ElementBuilder('i').setAttributes({ class: 'fas fa-plus' }).getElement()
                 );
+                increaseButton.getElement().addEventListener('click', () => this.addItem(item.producto, 1));
 
                 const decreaseButton = new ElementBuilder('button')
                     .setAttributes({
@@ -122,6 +128,7 @@ export class Carrito {
                 decreaseButton.addElementChild(
                     new ElementBuilder('i').setAttributes({ class: 'fas fa-minus' }).getElement()
                 );
+                decreaseButton.getElement().addEventListener('click', () => this.removeItem(item.producto, 1));
 
                 const removeButton = new ElementBuilder('button')
                     .setAttributes({ 
@@ -131,6 +138,11 @@ export class Carrito {
                 removeButton.addElementChild(
                     new ElementBuilder('i').setAttributes({ class: 'fas fa-trash' }).getElement()
                 );
+                removeButton.getElement().addEventListener('click', () => this.removeItem(item.producto, null));
+
+                decreaseButton.getElement().addEventListener('click', () => this.toHtml());
+                removeButton.getElement().addEventListener('click', () => this.toHtml());
+                increaseButton.getElement().addEventListener('click', () => this.toHtml());
 
                 const buttonsContent = new ElementBuilder('div')
                     .setAttributes({ class: 'btn-group justify-self-end' })
@@ -180,14 +192,34 @@ export class Carrito {
                 .addElementChild(totalTitle)
                 .addElementChild(priceTotal);
 
-            // extraño el innerHtml :(
 
             listItems.push(Row.getElement());
-
             modalContent = new ElementBuilder('div').createList(listItems, 'ul').getElement();
         }
-        const modal = new ElementBuilder('div').createModal('Carrito', modalContent);
+        const modal = new ElementBuilder('div').createModal('Carrito-modal', modalContent);
     
         return modal;
+    }
+
+    agregarALocalStorage() {
+        localStorage.setItem('carrito', JSON.stringify(this.items));
+    }
+
+    cargarDesdeLocalStorage(listado) {
+        try {
+            const data = JSON.parse(localStorage.getItem('carrito'));
+            if (Array.isArray(data)) {
+                this.items = data.filter(item => {
+                    const producto = listado.productos.find(p => p.id === item.producto.id);
+                    if (!producto) {
+                        return false;
+                    }
+                    item.producto = producto;
+                    return true;
+                });
+            }
+        } catch (error) {
+            console.error("Error al cargar desde localStorage:", error);
+        }
     }
 }

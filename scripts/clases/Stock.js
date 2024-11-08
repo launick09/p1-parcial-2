@@ -68,13 +68,12 @@ export class Stock {
      * Devuelve HTML para el stock.
      * @returns {HTMLElement} - Elemento HTML que contiene todos los productos.
      */
-    toHtml(productos = null) {
+    toHtml(carrito, productos = null) {
         const listado = productos ?? this.productos;
         const list = new ElementBuilder('div').setAttributes({ class: 'row' });
         listado.forEach(producto => {
-            const column = new ElementBuilder('div').setAttributes({ class: 'col-12 col-sm-6 col-md-4 col-xl-3' });
-            
-            const productHtml = producto.toHtml();  
+            const column = new ElementBuilder('div').setAttributes({ class: 'col-12 col-sm-6 col-md-4 col-xl-3' });            
+            const productHtml = producto.toHtml(carrito);  
                       
             column.addElementChild(productHtml);
             list.addElementChild(column);

@@ -5,6 +5,7 @@
  */
 
 import { ElementBuilder } from './ElementBuilder.js';
+import { Carrito } from './Carrito.js';
 
 /**
  * @class Producto
@@ -38,19 +39,17 @@ export class Producto{
      * Devuelve HTML
      * @returns {String} 
      */
-    toHtml(){
+    toHtml(carrito = null){        
         const cardDiv = new ElementBuilder('div')
             .setAttributes({ 
                 class: 'card border-0 m-auto p-2 h-100 d-flex', 
                 style: 'max-width: 400px;' 
             });
-
         const infoDiv = new ElementBuilder('div').setAttributes({ class: 'd-flex justify-content-between my-1' });      
         // stock
         const stockElement = new ElementBuilder('p').addTextChild(`${this.stock}u disponibles`).setAttributes({ style: 'font-size: 0.7rem;' });      
         // rating
         const ratingElement = new ElementBuilder('p').addTextChild(`${this.rating} ★`);  
-
         // imagen
         const imageElement = new ElementBuilder('img')
             .setAttributes({
@@ -90,8 +89,10 @@ export class Producto{
         .addTextChild('Detalle')
         .setAttributes({ 
             class: 'btn btn-sm w-100 btn-secondary my-1',
-            'aria-info-id': this.id
-         });
+            'aria-info-id': this.id,
+        });
+        DetalleElement.getElement().addEventListener('click', () => this.getInfo(carrito));
+
         // Agregar al carrito
         const buttonElement = new ElementBuilder('button')
             .addTextChild('Agregar al Carrito')
@@ -99,8 +100,10 @@ export class Producto{
                 class: 'btn btn-sm w-100 btn-warning my-1',
                 'aria-data-id': this.id
              });
+        if(carrito){
+            buttonElement.getElement().addEventListener('click', () => carrito.addItem(this));
+        }
             
-             
         // agrego todo        
         infoDiv.addElementChild(stockElement);
         infoDiv.addElementChild(ratingElement);
@@ -116,13 +119,13 @@ export class Producto{
         return cardDiv.getElement();
     }
     
-    getInfo(producto){        
+    getInfo(carrito = null){        
+        const producto = this;        
         const productImage = new ElementBuilder('img')
             .setAttributes({ 
                 src: producto.imagen,
                 alt: producto.nombre, 
                 class: 'img-fluid mb-3',
-                // style: 'max-width: 300px;' 
             });
 
         const productName = new ElementBuilder('p')
@@ -149,13 +152,25 @@ export class Producto{
             .setAttributes({ class: 'col-12 col-md-4' })
             .addElementChild(productImage)
 
+        const buttonElement = new ElementBuilder('button')
+        .addTextChild('Agregar al Carrito')
+        .setAttributes({ 
+            class: 'btn btn-sm w-100 btn-warning my-1',
+            'aria-data-id': this.id
+            });
+        if(carrito && this.stock >= 1){
+            buttonElement.getElement().addEventListener('click', () => carrito.addItem(this));
+        }
+
+
         const modalContent = new ElementBuilder('div')
             .setAttributes({ class: 'col-12 col-md-8' })
             .addElementChild(productName)
             .addElementChild(productCategory)
             .addElementChild(productDescription)
             .addElementChild(productPrice)
-            .addElementChild(productRating);
+            .addElementChild(productRating)
+            .addElementChild(buttonElement);
 
         const rowContent = new ElementBuilder('div')
             .setAttributes({ class: 'row' })

@@ -36,13 +36,9 @@
                     <div id="filtros" class="d-flex flex-wrap align-items-center w-100" style="gap:1rem">
                         <div class="rango">
                             <label for="filtro-rango-min">Rango de precio:</label>
-                            <div class="row">
-                                <div class="col-6">
-                                    <input class="form-control form-control-sm change" type="number" min="0" id="filtro-rango-min" placeholder="Mínimo">
-                                </div>
-                                <div class="col-6">
-                                    <input class="form-control form-control-sm change" type="number" min="0" id="filtro-rango-max" placeholder="Máximo">
-                                </div>
+                            <div class="d-flex">
+                                <input class="form-range change" type="range" min="0" max="100000" step="5000" value="0" id="filtro-rango-max">
+                                <span id="max-value-display" class="ms-2" style="min-width: 100px;"></span>
                             </div>
                         </div>
                         <div class="categoria">
