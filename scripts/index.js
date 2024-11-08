@@ -10,7 +10,6 @@ import { Producto } from './clases/Producto.js';
 
 const listado = new Stock();
 const carrito = new Carrito();
-const producto = new Producto();
 
 const button = document.getElementById('comprar');
 
