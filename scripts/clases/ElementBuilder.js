@@ -93,8 +93,7 @@ export class ElementBuilder {
     createModal(titulo = 'modal', contenido) {
         const modalId = titulo.toLowerCase().replace(' ', '-');
         const existingModal = document.getElementById(modalId);
-        console.log(existingModal);
-        
+
         if (existingModal) {
             const modalTitle = existingModal.querySelector('.modal-title');
             if (modalTitle) {
@@ -131,12 +130,12 @@ export class ElementBuilder {
         const modalHeader = new ElementBuilder('div').setAttributes({ class: 'modal-header' });
         const modalTitleElement = new ElementBuilder('h5').addTextChild(titulo).setAttributes({
             id: modalId + "Label",
-            class: "modal-title d-flex justify-content-between container py-2"
+            class: "modal-title d-flex justify-content-between"
         });
         modalHeader.addElementChild(modalTitleElement);
     
         const closeButton = new ElementBuilder('button')
-            .setAttributes({ type: "button", class: "btn-close", 'data-bs-dismiss': "modal" })
+            .setAttributes({ type: "button", class: "btn-close"})
             .addElementChild(new ElementBuilder('span').addTextChild(''));
     
         modalHeader.addElementChild(closeButton);
@@ -152,8 +151,15 @@ export class ElementBuilder {
         // Footer
         const modalFooter = new ElementBuilder('div').setAttributes({ class: 'modal-footer' });
         const closeFooterButton = new ElementBuilder('button')
-            .setAttributes({ type: "button", class: "btn btn-warning", 'data-bs-dismiss': "modal" })
+            .setAttributes({ type: "button", class: "btn btn-warning"})
             .addTextChild('Cerrar');
+
+        closeButton.getElement().addEventListener('click', () => {
+            ElementBuilder.closeModal(modalId)
+        });
+        closeFooterButton.getElement().addEventListener('click', () => {
+            ElementBuilder.closeModal(modalId)
+        });
     
         modalFooter.addElementChild(closeFooterButton);
     
@@ -166,10 +172,26 @@ export class ElementBuilder {
         // que dolor de cabeza
         // lo saque de aca: https://getbootstrap.com/docs/5.3/components/modal/#via-javascript
         document.body.appendChild(modal.getElement());
-        const modalInstance = bootstrap.Modal.getOrCreateInstance(modal.getElement()); // Mejor forma de obtener la instancia del modal
+        const modalInstance = bootstrap.Modal.getOrCreateInstance(modal.getElement());
         modalInstance.show();
     
         return modal.getElement();
+    }
+
+    /**remueve el modal
+     * @param {String} modalId - nombre del modañ
+     */
+    static closeModal(modalId) {
+        const modal = document.getElementById(modalId); 
+        if (modal) {
+            const modalInstance = bootstrap.Modal.getInstance(modal);
+            if (modalInstance) {
+                modalInstance.hide();
+            }
+            modal.addEventListener('hidden.bs.modal', () => {
+                modal.remove();
+            });
+        }
     }
 
     /**

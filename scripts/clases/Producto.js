@@ -120,7 +120,8 @@ export class Producto{
     }
     
     getInfo(carrito = null){        
-        const producto = this;        
+        const producto = this;       
+        const id = producto.nombre.toLowerCase().replace(/\s+/g, '-');
         const productImage = new ElementBuilder('img')
             .setAttributes({ 
                 src: producto.imagen,
@@ -158,8 +159,13 @@ export class Producto{
             class: 'btn btn-sm w-100 btn-warning my-1',
             'aria-data-id': this.id
             });
+            
         if(carrito && this.stock >= 1){
-            buttonElement.getElement().addEventListener('click', () => carrito.addItem(this));
+            buttonElement.getElement().addEventListener('click', () => {
+                carrito.addItem(this);                
+                ElementBuilder.closeModal(id);
+                carrito.toHtml();
+            });
         }
 
 
@@ -177,7 +183,7 @@ export class Producto{
             .addElementChild(imgContent)
             .addElementChild(modalContent)
 
-        return new ElementBuilder('div').createModal( producto.nombre , rowContent.getElement());
+        return new ElementBuilder('div').createModal( id , rowContent.getElement());
     }
 
 }

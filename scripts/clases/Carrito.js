@@ -24,12 +24,14 @@ export class Carrito {
         if (itemIndex >= 0) {
             let productoAgregado = this.items[itemIndex];
             if (producto.stock < productoAgregado.cantidad + cantidad) {
-                throw new Error(`Stock insuficiente para ${producto.nombre}. ${producto.stock} unidades disponibles.`);
+                alert(`Stock insuficiente para ${producto.nombre}. ${producto.stock} unidades disponibles.`);
+                return;
             }            
             productoAgregado.cantidad += cantidad;
         } else {
             if (producto.stock < cantidad) {
-                throw new Error(`Stock insuficiente para ${producto.nombre}. ${producto.stock} unidades disponibles.`);
+                alert(`Stock insuficiente para ${producto.nombre}. ${producto.stock} unidades disponibles.`);
+                return;
             }
             this.items.push({ producto, cantidad });
         }
@@ -69,6 +71,7 @@ export class Carrito {
         } else {
             throw new Error(`El producto ${producto.nombre} no está en el carrito.`);
         }
+        this.calcularCantidad();
         this.agregarALocalStorage();
     }
 
@@ -77,6 +80,7 @@ export class Carrito {
      */
     clear() {
         this.items = [];
+        this.calcularCantidad();
         this.agregarALocalStorage();
     }
 
@@ -196,7 +200,7 @@ export class Carrito {
             listItems.push(Row.getElement());
             modalContent = new ElementBuilder('div').createList(listItems, 'ul').getElement();
         }
-        const modal = new ElementBuilder('div').createModal('Carrito-modal', modalContent);
+        const modal = new ElementBuilder('div').createModal('Mi Carrito', modalContent);
     
         return modal;
     }

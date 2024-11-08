@@ -32,11 +32,6 @@ function mostrar(content) {
 // usar funciones para remover y eliminar o unificar() - Done
 // usar local storage <- para guardar el carrito Done
 
-
-function mostrarCarrito() {
-    carrito.toHtml();
-}
-
 function cargarJson() {
     console.log('cargando productos..');
     // fetch('/productos.json')
@@ -57,8 +52,9 @@ function cargarJson() {
     .finally( console.log('carga finalizada.') );
 }
 
-function filtrarProductos() {
+function filtrarProductos() {    
     const rangoMax = Number(rangoMaximo.value) || Infinity;
+    
     const categoria = String(document.getElementById('categoria').value) || null;
 
     const productos = listado.productos.filter(producto => {
@@ -70,19 +66,21 @@ function filtrarProductos() {
 }
 
 
-window.addEventListener('DOMContentLoaded', cargarJson);
+window.addEventListener('DOMContentLoaded', () => {
+    cargarJson();   
+    button.addEventListener('click', () => carrito.toHtml());
+});
 
 document.querySelectorAll('#filtros .change').forEach(input => {
     input.addEventListener('input', filtrarProductos);
 });
 
 rangoMaximo.addEventListener('input', (e) => {
-    maximoDisplay.textContent = e.target.value == 0 ? '' : e.target.value ;
+    maximoDisplay.textContent = e.target.value == 0 ? '' : e.target.value + ' $' ;
 });
 
 orden.addEventListener('change', () => {
     const productos = listado.sortStock(orden.value);
     mostrar(listado.toHtml(carrito,productos));
+    filtrarProductos();
 });
-
-button.addEventListener('click', mostrarCarrito);
