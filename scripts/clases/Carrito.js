@@ -80,8 +80,8 @@ export class Carrito {
      */
     clear() {
         this.items = [];
-        this.calcularCantidad();
         this.agregarALocalStorage();
+        this.calcularCantidad();
     }
 
     /**
@@ -198,7 +198,22 @@ export class Carrito {
 
 
             listItems.push(Row.getElement());
-            modalContent = new ElementBuilder('div').createList(listItems, 'ul').getElement();
+            const content = new ElementBuilder('div').createList(listItems, 'ul');
+
+            const vaciarBtn = new ElementBuilder('button')
+                .setAttributes({ type: "button", class: "btn btn-outline-warning"})
+                .addTextChild('Vaciar Carrito');
+
+            vaciarBtn.getElement().addEventListener('click', () => {
+                this.clear();
+                this.toHtml();
+            });
+
+            modalContent = new ElementBuilder('div')
+                .addElementChild(vaciarBtn)
+                .addElementChild(content)
+                .getElement();
+
         }
         const modal = new ElementBuilder('div').createModal('Mi Carrito', modalContent);
     
