@@ -121,7 +121,7 @@ export class Producto{
     
     getInfo(carrito = null){        
         const producto = this;       
-        const id = producto.nombre.toLowerCase().replace(/\s+/g, '-');
+
         const productImage = new ElementBuilder('img')
             .setAttributes({ 
                 src: producto.imagen,
@@ -163,7 +163,7 @@ export class Producto{
         if(carrito && this.stock >= 1){
             buttonElement.getElement().addEventListener('click', () => {
                 carrito.addItem(this);                
-                ElementBuilder.closeModal(id);
+                ElementBuilder.closeModal(producto.nombre);
                 carrito.toHtml();
             });
         }
@@ -183,7 +183,7 @@ export class Producto{
             .addElementChild(imgContent)
             .addElementChild(modalContent)
 
-        return new ElementBuilder('div').createModal( id , rowContent.getElement());
+        return new ElementBuilder('div').createModal( producto.nombre , rowContent.getElement());
     }
 
 }

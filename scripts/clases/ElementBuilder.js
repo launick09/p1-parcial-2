@@ -71,6 +71,17 @@ export class ElementBuilder {
     }
 
     /**
+     * @param {Array} hijos
+     * @returns {ElementBuilder} - elemento con hijos
+     */
+    addMultipleElementChild(hijos) {        
+        hijos.forEach(hijo => {
+            this.addElementChild(hijo);
+        });
+        return this;
+    }
+
+    /**
      * @returns - Elemento
      */
     getElement() {
@@ -91,7 +102,8 @@ export class ElementBuilder {
      * @returns {HTMLElement} -El modal.
      */
     createModal(titulo = 'modal', contenido) {
-        const modalId = titulo.toLowerCase().replace(' ', '-');
+        let modalId = titulo;
+        modalId = modalId.toLowerCase().replace(/\s+/g, '');
         const existingModal = document.getElementById(modalId);
 
         if (existingModal) {
@@ -182,6 +194,7 @@ export class ElementBuilder {
      * @param {String} modalId - nombre del modañ
      */
     static closeModal(modalId) {
+        modalId = modalId.toLowerCase().replace(/\s+/g, '');
         const modal = document.getElementById(modalId); 
         if (modal) {
             const modalInstance = bootstrap.Modal.getInstance(modal);
@@ -213,4 +226,20 @@ export class ElementBuilder {
         });
         return listElement;
     }
+
+    /**
+     * Crea un input con label
+     */
+    createInput(titulo, type = 'text', nombre = null, atributos = {}) {
+        const container = new ElementBuilder('div').setAttributes({ class: 'form-group mb-3' });
+        const label = new ElementBuilder('label')
+          .addTextChild(titulo)
+          .setAttributes({ for: nombre });
+        const input = new ElementBuilder('input')
+            .setAttributes({ type: type, id: nombre, name: nombre })
+            .setAttributes({ class: 'form-control' })
+            .setAttributes(atributos);
+        return container.addElementChild(label).addElementChild(input);
+    }
+
 }

@@ -7,6 +7,7 @@
 
 import { ElementBuilder } from './ElementBuilder.js';
 import { Producto } from './Producto.js';
+import { Checkout } from './Checkout.js';
 
 export class Carrito {
     constructor() {
@@ -209,9 +210,20 @@ export class Carrito {
                 this.toHtml();
             });
 
+            const comprarBtn = new ElementBuilder('button')
+                .setAttributes({ type: "button", class: "btn btn-warning"})
+                .addTextChild('Comprar!');
+
+            comprarBtn.getElement().addEventListener('click', () => {
+                ElementBuilder.closeModal('Mi Carrito');
+                const checkout = new Checkout(this);
+                checkout.toHtml();  
+            });
+
             modalContent = new ElementBuilder('div')
                 .addElementChild(vaciarBtn)
                 .addElementChild(content)
+                .addElementChild(comprarBtn)
                 .getElement();
 
         }
