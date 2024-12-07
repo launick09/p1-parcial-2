@@ -5,6 +5,7 @@
         "descripcion": "Licuadora de alta potencia ideal para batidos y salsas.",
         "precio": 35000.0,
         "imagen": "https://m.media-amazon.com/images/I/810Fz0Z0J2L.jpg",
+		"galeria": ["https://m.media-amazon.com/images/I/810Fz0Z0J2L.jpg"],
         "categoria": "Electrodomésticos",
         "stock": 15,
         "rating": 4.5
@@ -15,6 +16,7 @@
         "descripcion": "Máquina de espresso de alta calidad con múltiples configuraciones.",
         "precio": 38000.0,
         "imagen": "https://www.suono.com.ar/media/catalog/product/cache/be277d79a8d024490fdf6d84a1464e00/h/o/hog0189ace-web.jpg",
+		"galeria": ["https://www.suono.com.ar/media/catalog/product/cache/be277d79a8d024490fdf6d84a1464e00/h/o/hog0189ace-web.jpg"],
         "categoria": "Electrodomésticos",
         "stock": 5,
         "rating": 4.7
@@ -25,6 +27,7 @@
         "descripcion": "Hervidor eléctrico de ebullición rápida con apagado automático.",
         "precio": 6000.0,
         "imagen": "https://m.media-amazon.com/images/I/71fc9HkoVAL._AC_SL1500_.jpg",
+		"galeria": ["https://m.media-amazon.com/images/I/71fc9HkoVAL._AC_SL1500_.jpg"],
         "categoria": "Electrodomésticos",
         "stock": 20,
         "rating": 4.5
@@ -35,6 +38,7 @@
         "descripcion": "Cuchara de madera para mezclar y cocinar.",
         "precio": 1500.0,
         "imagen": "https://www.papelerapitti.com.ar/4962-large_default/cuchara-madera-25-cmts-.jpg",
+		"galeria": ["https://www.papelerapitti.com.ar/4962-large_default/cuchara-madera-25-cmts-.jpg"],
         "categoria": "Utensilios",
         "stock": 50,
         "rating": 4.6
@@ -45,6 +49,7 @@
         "descripcion": "Espátula de silicona resistente al calor.",
         "precio": 2000.0,
         "imagen": "https://larepo.com.ar/dlr/8337-large_default/espatula-silicona-20-cms-una-pieza-x-unid.jpg",
+		"galeria": ["https://larepo.com.ar/dlr/8337-large_default/espatula-silicona-20-cms-una-pieza-x-unid.jpg"],
         "categoria": "Utensilios",
         "stock": 40,
         "rating": 4.8
@@ -55,6 +60,7 @@
         "descripcion": "Colador ideal para pasta y verduras.",
         "precio": 3500.0,
         "imagen": "https://casagini.com/wp-content/uploads/COLADOR.jpg",
+		"galeria": ["https://casagini.com/wp-content/uploads/COLADOR.jpg"],
         "categoria": "Utensilios",
         "stock": 30,
         "rating": 4.7
@@ -65,6 +71,7 @@
         "descripcion": "Sartén antiadherente de 12 pulgadas para cocinar fácilmente.",
         "precio": 7500.0,
         "imagen": "https://jopco.net/wp-content/uploads/2020/11/WI-SSFP-12NS-623x623.jpg",
+		"galeria": ["https://jopco.net/wp-content/uploads/2020/11/WI-SSFP-12NS-623x623.jpg"],
         "categoria": "Sartenes y Ollas",
         "stock": 35,
         "rating": 4.4
@@ -75,6 +82,7 @@
         "descripcion": "Juego de 10 piezas de ollas y sartenes de cerámica antiadherente.",
         "precio": 40000.0,
         "imagen": "https://dcdn.mitiendanube.com/stores/002/004/595/products/1-3-5a24fd3e76a2342feb17270307687620-1024-1024.jpg",
+		"galeria": ["https://dcdn.mitiendanube.com/stores/002/004/595/products/1-3-5a24fd3e76a2342feb17270307687620-1024-1024.jpg"],
         "categoria": "Sartenes y Ollas",
         "stock": 8,
         "rating": 4.6
@@ -85,6 +93,7 @@
         "descripcion": "Termómetro de lectura rápida para temperaturas de cocción perfectas.",
         "precio": 2500.0,
         "imagen": "https://acdn.mitiendanube.com/stores/896/208/products/11-b330e73cceaf0ec74416444422355607-640-0.jpg",
+		"galeria": ["https://acdn.mitiendanube.com/stores/896/208/products/11-b330e73cceaf0ec74416444422355607-640-0.jpg"],
         "categoria": "Accesorios",
         "stock": 50,
         "rating": 4.2
@@ -95,6 +104,7 @@
         "descripcion": "Rallador de queso de acero inoxidable. con forma de animalito :3",
         "precio": 1800.0,
         "imagen": "https://dejadepensar.com/wp-content/uploads/2018/02/Erizo-rallador-de-queso-2.jpg",
+		"galeria": ["https://dejadepensar.com/wp-content/uploads/2018/02/Erizo-rallador-de-queso-2.jpg"],
         "categoria": "Accesorios",
         "stock": 20,
         "rating": 4.5
@@ -105,6 +115,7 @@
         "descripcion": "Cafetera francesa clásica para una taza de café perfecta.",
         "precio": 8000.0,
         "imagen": "https://acdn.mitiendanube.com/stores/001/132/600/products/cafetera-francesa-wood-lacor-rene-462cee40690b3c4ef217173714845984-1024-1024.jpg",
+		"galeria": ["https://acdn.mitiendanube.com/stores/001/132/600/products/cafetera-francesa-wood-lacor-rene-462cee40690b3c4ef217173714845984-1024-1024.jpg"],
         "categoria": "Café",
         "stock": 25,
         "rating": 4.6
@@ -115,6 +126,7 @@
         "descripcion": "Molino de café con múltiples configuraciones de molienda.",
         "precio": 4500.0,
         "imagen": "https://osterar.vtexassets.com/arquivos/ids/156055/BVSTBMH23-1.jpg?v=637227402249100000",
+		"galeria": ["https://osterar.vtexassets.com/arquivos/ids/156055/BVSTBMH23-1.jpg?v=637227402249100000"],
         "categoria": "Café",
         "stock": 15,
         "rating": 4.7
@@ -125,6 +137,7 @@
         "descripcion": "Juego de 12 platos de cerámica colorida.",
         "precio": 18000.0,
         "imagen": "https://m.media-amazon.com/images/I/81XSjAWEJlL.jpg",
+		"galeria": ["https://m.media-amazon.com/images/I/81XSjAWEJlL.jpg"],
         "categoria": "Vajilla",
         "stock": 10,
         "rating": 4.4
@@ -135,6 +148,7 @@
         "descripcion": "Juego de 6 tazas de café de porcelana.",
         "precio": 12000.0,
         "imagen": "https://media.wonderfulhomeshop.com/c/product/set-6-tazas-cafe-juego-de-cafe-bellis-versa-520x520.jpg",
+		"galeria": ["https://media.wonderfulhomeshop.com/c/product/set-6-tazas-cafe-juego-de-cafe-bellis-versa-520x520.jpg"],
         "categoria": "Vajilla",
         "stock": 2,
         "rating": 4.5
@@ -145,6 +159,7 @@
         "descripcion": "Juego de 24 cubiertos de acero inoxidable.",
         "precio": 25000.0,
         "imagen": "https://acdn.mitiendanube.com/stores/305/334/products/1-4ca413b0019a22458a17207159315791-1024-1024.jpg",
+		"galeria": ["https://acdn.mitiendanube.com/stores/305/334/products/1-4ca413b0019a22458a17207159315791-1024-1024.jpg"],
         "categoria": "Cubiertos",
         "stock": 12,
         "rating": 4.8
@@ -155,6 +170,7 @@
         "descripcion": "Juego de cucharas medidoras de acero inoxidable.",
         "precio": 1200.0,
         "imagen": "https://m.media-amazon.com/images/I/51xLeqS4ruL.jpg",
+		"galeria": ["https://m.media-amazon.com/images/I/51xLeqS4ruL.jpg"],
         "categoria": "Cubiertos",
         "stock": 40,
         "rating": 4.3
@@ -165,6 +181,7 @@
         "descripcion": "Contenedor hermético de vidrio para almacenar alimentos.",
         "precio": 3000.0,
         "imagen": "https://acdn.mitiendanube.com/stores/002/211/880/products/abierto-bc5bef3d76ad30b5eb17091209022975-240-0.jpg",
+		"galeria": ["https://acdn.mitiendanube.com/stores/002/211/880/products/abierto-bc5bef3d76ad30b5eb17091209022975-240-0.jpg"],
         "categoria": "Contenedores y Almacenamiento",
         "stock": 30,
         "rating": 4.5
@@ -175,6 +192,7 @@
         "descripcion": "Juego de 6 tuppers de diferentes tamaños.",
         "precio": 4000.0,
         "imagen": "https://http2.mlstatic.com/D_836577-MLA46204061427_052021-C.jpg",
+		"galeria": ["https://http2.mlstatic.com/D_836577-MLA46204061427_052021-C.jpg"],
         "categoria": "Contenedores y Almacenamiento",
         "stock": 25,
         "rating": 4.6
@@ -185,6 +203,10 @@
         "descripcion": "Coffee Coffee Coffee Coffee Coffee Coffee Coffee Coffee. Un simple grano de café",
         "precio": 0.50,
         "imagen": "https://us.123rf.com/450wm/vecstock/vecstock2103/vecstock210301385/166032042-bolsa-de-caf%C3%A9-sobre-fondo-blanco.jpg?ver=6",
+		"galeria": [
+            "https://us.123rf.com/450wm/vecstock/vecstock2103/vecstock210301385/166032042-bolsa-de-caf%C3%A9-sobre-fondo-blanco.jpg?ver=6",
+            "https://i.ytimg.com/vi/qJ1XnNTE9n0/maxresdefault.jpg"
+        ],
         "categoria": "Café",
         "stock": 9999999999,
         "rating": 5
@@ -195,6 +217,7 @@
         "descripcion": "Paquete de 10 esponjas de cocina.",
         "precio": 800.0,
         "imagen": "https://m.media-amazon.com/images/I/711c2iLsetL.jpg",
+		"galeria": ["https://m.media-amazon.com/images/I/711c2iLsetL.jpg"],
         "categoria": "Limpieza",
         "stock": 100,
         "rating": 4.5
@@ -205,6 +228,7 @@
         "descripcion": "Botella de 500 ml de detergente para platos.",
         "precio": 1200.0,
         "imagen": "https://alberdisa.vteximg.com.br/arquivos/ids/161601-600-600/Lavavajilla-Cif-Limon-500ml.jpg?v=637378526385370000",
+		"galeria": ["https://alberdisa.vteximg.com.br/arquivos/ids/161601-600-600/Lavavajilla-Cif-Limon-500ml.jpg?v=637378526385370000"],
         "categoria": "Limpieza",
         "stock": 50,
         "rating": 4.4
@@ -215,6 +239,7 @@
         "descripcion": "Pelador de verduras ergonómico.",
         "precio": 1500.0,
         "imagen": "https://m.media-amazon.com/images/I/41hjQyg-cWL.jpg",
+		"galeria": ["https://m.media-amazon.com/images/I/41hjQyg-cWL.jpg"],
         "categoria": "Gadgets de Cocina",
         "stock": 60,
         "rating": 4.6
@@ -225,6 +250,7 @@
         "descripcion": "Prensa de ajo de acero inoxidable.",
         "precio": 2000.0,
         "imagen": "https://acdn.mitiendanube.com/stores/102/583/products/prensador-ajo-prensa-leifheit-acero-sterling-tienda-pepino-11-afe3466eefd7ed395215987269453311-1024-1024.jpg",
+		"galeria": ["https://acdn.mitiendanube.com/stores/102/583/products/prensador-ajo-prensa-leifheit-acero-sterling-tienda-pepino-11-afe3466eefd7ed395215987269453311-1024-1024.jpg"],
         "categoria": "Gadgets de Cocina",
         "stock": 45,
         "rating": 4.8
@@ -235,6 +261,7 @@
         "descripcion": "Sable tradicional de la dinastía Qing. hoja de acero 1095 forjada a mano, con filo. cordón de color rojo. largo total: 91 cm (hoja de 70 cm.). peso: 1250 gramos desenvainado /// 1917 g. con la vaina - medidas y peso aproximados -",
         "precio": 650000.0,
         "imagen": "https://http2.mlstatic.com/D_NQ_NP_858990-MLA74805685623_022024-O.webphttps://http2.mlstatic.com/D_NQ_NP_858990-MLA74805685623_022024-O.webp",
+		"galeria": ["https://http2.mlstatic.com/D_NQ_NP_858990-MLA74805685623_022024-O.webphttps://http2.mlstatic.com/D_NQ_NP_858990-MLA74805685623_022024-O.webp"],
         "categoria": "Accesorios",
         "stock": 0,
         "rating": 2

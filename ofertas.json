@@ -1,0 +1,25 @@
+[
+    {
+        "id": 1,
+        "tipo": "PORCENTAJE",
+        "valor": 15,
+        "categorias": ["Electrodomésticos"],
+        "productos": [],
+        "descripcion": "15% de descuento en toda la categoría de Electrodomésticos."
+    },
+    {
+        "id": 2,
+        "tipo": "CANTIDAD_FIJA",
+        "valor": 1000,
+        "categorias": [],
+        "productos": [4, 5, 6],
+        "descripcion": "$1000 de descuento en utensilios seleccionados."
+    },
+    {
+        "id": 3,
+        "tipo": "2x1",
+        "categorias": ["Sartenes y Ollas"],
+        "productos": [],
+        "descripcion": "Lleva 2 al precio de 1 en Sartenes y Ollas."
+    }
+]

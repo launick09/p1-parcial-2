@@ -35,3 +35,36 @@ html {
 .btn{
     box-shadow: none !important;
 }
+
+.galeria-productos{
+    gap: 0.25rem;
+}
+
+.galeria-productos .img-thumbnail{
+    width: 56px;
+    height: auto;
+    cursor: pointer;
+    border: 1px solid transparent;
+    transition: border 0.2s linear;
+}
+
+.galeria-productos .img-thumbnail:hover,
+.galeria-productos .img-thumbnail:focus,
+.galeria-productos .img-thumbnail.active{
+    border: 1px solid #ffc107;
+}
+
+.product-main-image {
+    aspect-ratio: 1;
+    max-height: 400px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.product-main-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}

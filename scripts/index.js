@@ -3,6 +3,7 @@
 import { Stock } from './clases/Stock.js';
 import { Carrito } from './clases/Carrito.js';
 import { Producto } from './clases/Producto.js';
+import { Oferta } from './clases/Oferta.js';
 
 /*
  * Arroyo Lautaro Alan
@@ -10,6 +11,9 @@ import { Producto } from './clases/Producto.js';
 
 const listado = new Stock();
 const carrito = new Carrito();
+const oferta = new Oferta();
+
+let ofertas = [];
 
 const button = document.getElementById('comprar');
 
@@ -25,30 +29,60 @@ function mostrar(content) {
     contenedor.appendChild(content);
 }
 
-// cambiar min max por slider - Done
-// -1 unidades - Done
-// Si, hay un flash al regenerar el DOM - ya No
-// usar funciones para remover y eliminar o unificar() - Done
-// usar local storage <- para guardar el carrito Done
+async function cargarOfertasJson() {
+    console.log('cargando ofertas..');
+    try {
+        const respuesta = await fetch('/ofertas.json');
+        const ofertasJson = await respuesta.json();
+        ofertas = ofertasJson.map(ofertaData => new Oferta(
+            ofertaData.id,
+            ofertaData.tipo,
+            ofertaData.valor,
+            ofertaData.categorias,
+            ofertaData.productos,
+            ofertaData.descripcion
+        ));
+    } catch (error) {
+        console.error('Error al cargar las ofertas');
+        console.error(error);
+    } finally {
+        console.log('carga de ofertas finalizada.');
+    }
+}
 
-function cargarJson() {
+async function cargarJson() {
     console.log('cargando productos..');
-    // fetch('/productos.json')
-    fetch('https://launick09.github.io/p1-parcial-2/productos.json')
-    .then(respuesta => respuesta.json() )
-    .then(respuesta => {
-        listado.createFromJson(respuesta);
+    try {
+        // Esperar a que las ofertas se carguen primero
+        await cargarOfertasJson();
+
+        // const respuesta = await fetch('https://launick09.github.io/p1-parcial-2/productos.json');
+        const respuesta = await fetch('/productos.json');
+        const productos = await respuesta.json();
+
+        listado.createFromJson(productos);
+        
+        vincularOfertasConProductos(listado.productos, ofertas);
+
         listado.sortStock();
         listado.setOptionsCategorias(categorias);
         carrito.cargarDesdeLocalStorage(listado);
         carrito.calcularCantidad();
-        mostrar( listado.toHtml(carrito))
-    })
-    .catch( error => {
-        console.error('Error al cargar');
+        mostrar(listado.toHtml(carrito));
+    } catch (error) {
+        console.error('Error al cargar los productos');
         console.error(error);
-    })
-    .finally( console.log('carga finalizada.') );
+    } finally {
+        console.log('carga finalizada.');
+    }
+}
+
+function vincularOfertasConProductos(productos, ofertas) {
+    productos.forEach(producto => {
+        
+        const ofertasValidas = ofertas.filter(oferta => oferta.esValida(producto));
+        producto.ofertas = ofertasValidas;
+    });
 }
 
 function filtrarProductos() {    
