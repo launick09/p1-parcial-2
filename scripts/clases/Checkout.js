@@ -6,18 +6,31 @@
 
 import { ElementBuilder } from './ElementBuilder.js';
 export class Checkout {
+    // para manejar los errores
+    #errores = [];
+    #valores = [];
+    
     constructor(carrito) {
         this.carrito = carrito;
     }
 
     toHtml() {
         const formulario = new ElementBuilder('form').setAttributes({ id: 'checkoutForm' });
-
         formulario.addMultipleElementChild([ 
-            new ElementBuilder('div').createInput('Nombre:', 'text', 'name'),
-            new ElementBuilder('div').createInput('Apellido:', 'text', 'surname'),
-            new ElementBuilder('div').createInput('Dirección:', 'text', 'address'),
-            new ElementBuilder('div').createInput('DNI:', 'number', 'dni', {min: 0}),
+            new ElementBuilder('div').setAttributes({class:'row'}).addMultipleElementChild([
+                this.#generarCampo('Nombre:', 'text', 'name', 'col-md-6 form-group mb-3', {value: this.#valores.nombre || ''}),
+                this.#generarCampo('Apellido:', 'text', 'surname', 'col-md-6 form-group mb-3', {value: this.#valores.apellido || ''}),
+            ]),
+            this.#generarCampo('Correo Electrónico:', 'email', 'mail', 'form-group mb-3', {value: this.#valores.mail || ''}),
+            this.#generarCampo('Fecha de Entrega:', 'date', 'date', 'form-group mb-3', {
+                min: (new Date()).toISOString().split('T')[0],
+                value: this.#valores.date || ''
+            }),
+            this.#generarCampo('Dirección:', 'text', 'address', 'form-group mb-3', {value: this.#valores.direccion || ''}),
+            this.#generarCampo('DNI:', 'number', 'dni', 'form-group mb-3', { min: 0 }, {value: this.#valores.dni || ''}),
+            this.#generarCampo('Teléfono:', 'number', 'cel', 'form-group mb-3', { min: 0 }, {value: this.#valores.cel || ''}),
+
+            new ElementBuilder('div').createSelect('Método de Pago:', 'pago', ['Debito', 'Credito', 'Organo'], {value: this.#valores.pago || ''}),
         ]);
 
         formulario.addElementChild(
@@ -33,15 +46,32 @@ export class Checkout {
     }
 
     procesarCompra() {
-        const nombre = document.getElementById('name').value.trim();
-        const apellido = document.getElementById('surname').value.trim();
-        const direccion = document.getElementById('address').value;
-        const dni = document.getElementById('dni').value;
+        this.#errores = [];
+        this.#valores = {
+            nombre: document.getElementById('name').value.trim(),
+            apellido: document.getElementById('surname').value.trim(),
+            direccion: document.getElementById('address').value.trim(),
+            date: document.getElementById('address').value.trim(),
+            mail: document.getElementById('mail').value.trim(),
+            dni: document.getElementById('dni').value.trim(),
+            cel: document.getElementById('cel').value.trim(),
+            pago: document.getElementById('pago').value
+        }
 
-        if (!nombre || !apellido || !direccion || !dni) {
-            alert('Por favor, completa todos los campos.');
+        //usar logica de laravel
+        if (!this.#valores.nombre) this.#errores.name = 'El nombre es obligatorio.';
+        if (!this.#valores.apellido) this.#errores.surname = 'El apellido es obligatorio.';
+        if (!this.#valores.mail) this.#errores.mail = 'El Correo Electronico es obligatorio.';
+        if (!this.#valores.direccion) this.#errores.address = 'La dirección es obligatoria.';
+        if (!this.#valores.date) this.#errores.date = 'La fecha es obligatoria.';
+        if (!this.#valores.dni) this.#errores.dni = 'El DNI es obligatorio.';
+        if (!this.#valores.cel) this.#errores.cel = 'El DNI es obligatorio.';
+
+        if (Object.keys(this.#errores).length > 0) {
+            this.toHtml();
             return;
         }
+
         ElementBuilder.closeModal('Finalizar Compra');
         this.carrito.clear();
         this.compraExitosa(nombre, direccion);
@@ -53,5 +83,21 @@ export class Checkout {
             Tu pedido será enviado a: ${direccion}\n
         `).setAttributes({ class: 'h5'});
         new ElementBuilder().createModal('Compra Exitosa!', contenido.getElement());
+    }
+
+    #generarCampo(label, type, id, classes = '', atributos = {}) {
+        const contenido = new ElementBuilder('div').setAttributes({ class: classes });
+        const input = new ElementBuilder('div').createInput(label, type, id, atributos );
+        const error = this.#errores[id] 
+            ? new ElementBuilder('div').addTextChild(`* ${this.#errores[id]}`).setAttributes({ class: 'text-danger small mt-1' })
+            : null;
+
+        contenido.addMultipleElementChild([
+            input,
+            error ? error : null
+        ]);
+
+
+        return contenido;
     }
 }

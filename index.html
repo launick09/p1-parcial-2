@@ -61,7 +61,40 @@
                 </div>
             </div>
         </header>
-        <main class="flex-grow-1 my-2">
+        <div class="w-100">
+            <div id="indicadores" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <picture>
+                            <source srcset="img/banner/m_banner_descuento.webp" class="w-100" media="(max-width: 576px)">
+                            <img src="img/banner/banner_descuento.webp" class="w-100" alt="Descuento en Cuchillos y Cubiertos">
+                        </picture>
+                    </div>
+                    <div class="carousel-item">
+                        <picture>
+                            <source srcset="img/banner/m_banner_oferta.webp" class="w-100" media="(max-width: 576px)">
+                            <img src="img/banner/banner_oferta.webp" class="w-100" alt="Descuento en compras Muy Grandes">
+                        </picture>
+                    </div>
+                    <div class="carousel-item">
+                        <picture>
+                            <source srcset="img/banner/m_banner_oferta2.webp" class="w-100" media="(max-width: 576px)">
+                            <img src="img/banner/banner_oferta2.webp" class="w-100" alt="Descuento en compras">
+                        </picture>
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#indicadores" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true">
+                    </span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#indicadores" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" 
+                        aria-hidden="true">
+                    </span>
+                </button>
+            </div>
+        </div>
+        <main class="flex-grow-1 my-2">           
             <div class="container">
                 <!-- Este es un ejemplo de contenedor de carrito -->
                 <div id="carrito">

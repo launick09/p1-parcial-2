@@ -231,7 +231,7 @@ export class ElementBuilder {
      * Crea un input con label
      */
     createInput(titulo, type = 'text', nombre = null, atributos = {}) {
-        const container = new ElementBuilder('div').setAttributes({ class: 'form-group mb-3' });
+        const container = new ElementBuilder('div').setAttributes({ class: 'form-group' });
         const label = new ElementBuilder('label')
           .addTextChild(titulo)
           .setAttributes({ for: nombre });
@@ -240,6 +240,29 @@ export class ElementBuilder {
             .setAttributes({ class: 'form-control' })
             .setAttributes(atributos);
         return container.addElementChild(label).addElementChild(input);
+    }
+
+    createSelect(titulo, nombre = null, opciones = [], atributos = {}) {
+        const container = new ElementBuilder('div').setAttributes({ class: 'form-group mb-3' });
+        const label = new ElementBuilder('label')
+            .addTextChild(titulo)
+            .setAttributes({ for: nombre });
+        const select = new ElementBuilder('select')
+            .setAttributes({ id: nombre, name: nombre})
+            .setAttributes({ class: 'form-control' })
+            .setAttributes(atributos);
+        opciones.forEach(opcion => {
+            const optionElement = new ElementBuilder('option')
+                .addTextChild(opcion.text || opcion)    //por si quiero poner algo distinto en el value
+                .setAttributes({ 
+                    value: opcion.value || opcion
+                });
+            if(opcion.value || opcion === atributos.value){
+                optionElement.setAttributes({ selected: 'selected' })
+            }
+            select.addElementChild(optionElement);
+        });
+        return container.addElementChild(label).addElementChild(select);
     }
 
 }

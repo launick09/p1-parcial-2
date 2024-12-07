@@ -102,8 +102,6 @@ export class Stock {
     createFromJson(json){
         try {   
             json.forEach(data => {
-                console.log(data);
-                
                 const { id, nombre, descripcion, precio, imagen, categoria, stock, rating, galeria } = data;
                 let producto = new Producto(id, nombre, descripcion, precio, imagen, categoria, stock, rating, [], galeria);
                 this.addProducto(producto);

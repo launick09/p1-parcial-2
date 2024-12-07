@@ -6,7 +6,6 @@
 
 import { ElementBuilder } from './ElementBuilder.js';
 import { TIPO_2x1 } from './Oferta.js';
-import { Oferta } from './Oferta.js';
 
 /**
  * @class Producto

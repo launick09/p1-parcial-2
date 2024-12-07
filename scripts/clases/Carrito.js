@@ -202,7 +202,7 @@ export class Carrito {
             const content = new ElementBuilder('div').createList(listItems, 'ul');
 
             const vaciarBtn = new ElementBuilder('button')
-                .setAttributes({ type: "button", class: "btn btn-outline-warning"})
+                .setAttributes({ type: "button", class: "btn btn-outline-warning my-2 me-4"})
                 .addTextChild('Vaciar Carrito');
 
             vaciarBtn.getElement().addEventListener('click', () => {
@@ -211,7 +211,7 @@ export class Carrito {
             });
 
             const comprarBtn = new ElementBuilder('button')
-                .setAttributes({ type: "button", class: "btn btn-warning"})
+                .setAttributes({ type: "button", class: "btn btn-warning my-2"})
                 .addTextChild('Comprar!');
 
             comprarBtn.getElement().addEventListener('click', () => {
@@ -221,8 +221,8 @@ export class Carrito {
             });
 
             modalContent = new ElementBuilder('div')
-                .addElementChild(vaciarBtn)
                 .addElementChild(content)
+                .addElementChild(vaciarBtn)
                 .addElementChild(comprarBtn)
                 .getElement();
 
