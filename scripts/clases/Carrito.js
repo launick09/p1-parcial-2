@@ -269,4 +269,11 @@ export class Carrito {
             console.error("Error al cargar desde localStorage:", error);
         }
     }
+
+    procesarCompra(){
+        this.items.forEach(producto => {
+            producto.producto.removerStock(producto.cantidad);
+        });
+        this.clear();
+    }
 }

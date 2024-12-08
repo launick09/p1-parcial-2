@@ -54,6 +54,10 @@ export class Producto{
         return this.ofertas.find(oferta => oferta.esValida(this))
     }
 
+    removerStock(cantidad){
+        this.stock -= cantidad;
+    }
+
     /**
      * Devuelve HTML
      * @returns {String} 

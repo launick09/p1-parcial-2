@@ -10,12 +10,11 @@ export class Checkout {
     #errores = [];
     #valores = [];
     
-    constructor(carrito, stock) {
+    constructor(carrito) {
         this.carrito = carrito;
-        this.stock = stock;
     }
 
-    toHtml() {
+    toHtml() {        
         const formulario = new ElementBuilder('form').setAttributes({ id: 'checkoutForm' });
         formulario.addMultipleElementChild([ 
             new ElementBuilder('div').setAttributes({class:'row'}).addMultipleElementChild([
@@ -71,7 +70,7 @@ export class Checkout {
         }
 
         ElementBuilder.closeModal('Finalizar Compra');
-        this.carrito.clear();
+        this.carrito.procesarCompra();
         this.compraExitosa(this.#valores);
     }
 
