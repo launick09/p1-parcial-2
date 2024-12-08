@@ -33,9 +33,12 @@ export class Oferta {
      * @param {Object} producto - El producto.
      * @returns {boolean} - Tiene oferta.
      */
-    esValida(producto) {
+    esValida(producto, cantidad = 2) {
         const Categoria = this.categorias.includes(producto.categoria);
         const Producto = this.productos.includes(producto.id);
+        if(this.tipo == TIPO_2x1 && cantidad <= 1){
+            return false;
+        }
         return Categoria || Producto;
     }
 
@@ -46,23 +49,21 @@ export class Oferta {
      * @returns {number} - El monto del descuento aplicado.
      */
     calcularDescuento(producto, cantidad) {
-        if (!this.esValida(producto)) return producto.precio * cantidad;
+        if (!this.esValida(producto, cantidad)) {
+            return 0
+        };
 
         switch (this.tipo) {
             case 'PORCENTAJE':
                 return (producto.precio * cantidad * this.valor) / 100;
             case 'CANTIDAD_FIJA':
-                return Math.min(this.valor * cantidad, producto.precio * cantidad);
+                const descuento = this.valor * cantidad;
+                return descuento < 0 ? producto.precio * cantidad : descuento;
             case '2x1':
-                let precio = 0;
-                if(cantidad % 2 == 0){
-                    precio = cantidad / 2 * producto.precio;
-                }else{
-                    precio = (Math.floor(cantidad / 2) * producto.precio) + producto.precio;
-                }
-                return precio;
+                const descuento2 = Math.floor(cantidad / 2); //xD
+                return descuento2 * producto.precio;
             default:
-                return producto.precio * cantidad;
+                return 0;
         }
     }
 }

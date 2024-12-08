@@ -87,12 +87,15 @@ export class Stock {
      * @returns {HTMLElement} - el popup
      */
     ofertaToHtml(carrito, categoria = null) {
-        console.log(categoria);
-        
-        const productos = this.productos.filter(producto => 
+        let productos = this.productos.filter(producto =>            
             producto.getOferta() && (categoria ? producto.categoria == categoria : true)
         );       
-        const Oferta = productos.length > 0 ? productos[Math.floor(Math.random() * productos.length)] : null
+        if(productos.length == 0){
+            productos = this.productos.filter(producto => producto.getOferta())
+        }
+
+        const Oferta = productos.length > 0 ? productos[Math.floor(Math.random() * productos.length)] : null;
+        
         if(Oferta){
             const btn = Oferta.buttonAgregar(carrito);
             btn.getElement().addEventListener('click', () => 

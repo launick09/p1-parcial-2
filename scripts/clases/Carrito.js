@@ -90,7 +90,7 @@ export class Carrito {
      * @returns {Number} - Precio total.
      */
     getTotal() {
-        return this.items.reduce((total, item) => total + item.producto.precio * item.cantidad, 0);
+        return this.items.reduce((total, item) => total + item.producto.obtenerPrecioConDescuento(item.cantidad), 0);
     }
 
     getCantidad(){
@@ -115,11 +115,10 @@ export class Carrito {
                     .addTextChild(item.producto.nombre)
                     .setAttributes({ class: 'fw-bold h5' });
 
-                const increaseButton = new ElementBuilder('button')
-                    .setAttributes({ 
-                        class: 'btn btn-outline-dark btn-sm increase-btn', 
-                        'aria-data-id': item.producto.id 
-                    });
+                const increaseButton = new ElementBuilder('button').setAttributes({ 
+                    class: 'btn btn-outline-dark btn-sm increase-btn', 
+                    'aria-data-id': item.producto.id 
+                });
                 increaseButton.addElementChild(
                     new ElementBuilder('i').setAttributes({ class: 'fas fa-plus' }).getElement()
                 );
@@ -145,33 +144,52 @@ export class Carrito {
                 );
                 removeButton.getElement().addEventListener('click', () => this.removeItem(item.producto, null));
 
-                decreaseButton.getElement().addEventListener('click', () => this.toHtml());
-                removeButton.getElement().addEventListener('click', () => this.toHtml());
-                increaseButton.getElement().addEventListener('click', () => this.toHtml());
+                //volver a generar el modal
+                [decreaseButton, removeButton, increaseButton].forEach(button => 
+                    button.getElement().addEventListener('click', () => this.toHtml())
+                );
 
                 const buttonsContent = new ElementBuilder('div')
                     .setAttributes({ class: 'btn-group justify-self-end' })
-                    .addElementChild(decreaseButton)
-                    .addElementChild(removeButton)
-                    .addElementChild(increaseButton);
+                    .addMultipleElementChild([
+                        decreaseButton,
+                        removeButton,
+                        increaseButton
+                    ])
 
-                const productPrice = new ElementBuilder('p')
-                    .addTextChild(`${item.cantidad} ${item.cantidad >= 2 ? 'unidades' : 'unidad'}. $${item.producto.precio}.`)
-                    .setAttributes({ class: 'text-primary text-end' });
+                const Oferta = item.producto.getOferta();
+                const tieneOferta = Oferta ? Oferta.esValida(item.producto, item.cantidad) : false;   
+                console.log(Oferta);
+                            
+
+                const productPrice = new ElementBuilder('div').addMultipleElementChild([
+                    new ElementBuilder('p')
+                        .addTextChild(`${item.cantidad} ${item.cantidad >= 2 ? 'unidades X ' : 'unidad'}. $${item.producto.precio} .`)
+                        .setAttributes({ class: 'text-primary text-end' }), 
+                    //si el producto tiene oferta y la oferta es mayor a 0, por problemas con el 2x1 
+                    tieneOferta 
+                        ? new ElementBuilder('p')
+                            .addTextChild(`${item.producto.getOferta().descripcion} - $${ Oferta.calcularDescuento(item.producto, item.cantidad) }.`)
+                            .setAttributes({ class: 'text-success text-end' })
+                        : null
+                ])
+
 
                 let productTotal = null;
-                if(item.cantidad >= 2){
+                if(item.cantidad >= 2 || tieneOferta){
                     productTotal = new ElementBuilder('p')
-                        .addTextChild(`Total: $${item.producto.precio * item.cantidad}.`)
+                        .addTextChild(`Total: $${item.producto.obtenerPrecioConDescuento(item.cantidad)}.`)
                         .setAttributes({ class: 'text-primary fw-bold text-end' });
                 }
 
                 const modalContent = new ElementBuilder('div')
-                    .setAttributes({class: 'col-9 col-md-10 m-auto'})
-                    .addElementChild(productName)
-                    .addElementChild(buttonsContent)
-                    .addElementChild(productPrice)
-                    .addElementChild(productTotal ?? '')
+                    .setAttributes({class: 'col-9 col-md-10 m-auto'}).addMultipleElementChild([
+                        productName,
+                        buttonsContent,
+                        productPrice,
+                        productTotal ?? null
+                    ])
+
                 const imgContent = new ElementBuilder('div')
                     .setAttributes({class: 'col-3 col-md-2'})
                     .addElementChild(productImage)

@@ -10,8 +10,9 @@ export class Checkout {
     #errores = [];
     #valores = [];
     
-    constructor(carrito) {
+    constructor(carrito, stock) {
         this.carrito = carrito;
+        this.stock = stock;
     }
 
     toHtml() {
@@ -51,7 +52,7 @@ export class Checkout {
             nombre: document.getElementById('name').value.trim(),
             apellido: document.getElementById('surname').value.trim(),
             direccion: document.getElementById('address').value.trim(),
-            date: document.getElementById('address').value.trim(),
+            date: document.getElementById('date').value.trim(),
             mail: document.getElementById('mail').value.trim(),
             dni: document.getElementById('dni').value.trim(),
             cel: document.getElementById('cel').value.trim(),
@@ -74,14 +75,25 @@ export class Checkout {
 
         ElementBuilder.closeModal('Finalizar Compra');
         this.carrito.clear();
-        this.compraExitosa(nombre, direccion);
+        this.compraExitosa(this.#valores);
     }
 
-    compraExitosa(nombre, direccion) {
-        const contenido = new ElementBuilder('p').addTextChild(`
-            ¡Gracias por tu compra, ${nombre}!\n
-            Tu pedido será enviado a: ${direccion}\n
-        `).setAttributes({ class: 'h5'});
+    compraExitosa(valores) {
+        const contenido = new ElementBuilder('div').addMultipleElementChild([
+            new ElementBuilder('p').addTextChild(`
+                ¡Gracias por tu compra, ${valores.nombre}!
+            `).setAttributes({ class: 'h5'}),
+            new ElementBuilder('p').addTextChild(`Tu pedido será enviado a: ${valores.direccion} el dia ${valores.date}`),
+            new ElementBuilder('p').addTextChild(`Método de pago: ${valores.pago}`),
+            new ElementBuilder('p').addTextChild(`¡Gracias por confiar en nuestros servicios! te hemos enviado un mail con el comprobante!`)
+                .setAttributes({
+                    class: 'text-center text-muted mt-4',
+                    style: 'font-size: 0.8rem'
+                }),
+            
+        ]);
+
+
         new ElementBuilder().createModal('Compra Exitosa!', contenido.getElement());
     }
 

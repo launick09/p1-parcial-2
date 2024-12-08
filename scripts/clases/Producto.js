@@ -42,7 +42,7 @@ export class Producto{
     obtenerPrecioConDescuento(cantidad = 1) {
         let precioFinal = this.precio * cantidad;
         this.ofertas.forEach(oferta => {
-            const descuento = oferta.calcularDescuento(this, cantidad);
+            const descuento = oferta.calcularDescuento(this, cantidad);            
             precioFinal -= descuento;
         });
 
@@ -109,7 +109,7 @@ export class Producto{
                     title: oferta.descripcion
                 });
                 precioConDescuento = new ElementBuilder('p')
-                    .addTextChild(`$${oferta.calcularDescuento(this, 1).toFixed(2)}`)
+                    .addTextChild(`$${this.obtenerPrecioConDescuento(1).toFixed(2)}`)
                     .setAttributes({ class: 'h3 text-success text-end' });
             }
             precioDiv.addElementChild(precioConDescuento);
@@ -196,7 +196,7 @@ export class Producto{
                     new ElementBuilder('span').setAttributes({ class: 'h3 text-success' }).addTextChild(
                         oferta.tipo == TIPO_2x1 
                         ? `$${this.precio/2} c/u`
-                        : `$${oferta.calcularDescuento(this, 1)}`
+                        : `$${this.obtenerPrecioConDescuento(1)}`
                     ),
                 ]),
                 new ElementBuilder('p').setAttributes({ class: 'text-dark' }).addTextChild(`${oferta.descripcion}!`)
