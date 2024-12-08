@@ -82,6 +82,46 @@ export class Stock {
         return list.getElement();
     }
 
+    /**
+     * Devuelve HTML para el popup.
+     * @returns {HTMLElement} - el popup
+     */
+    ofertaToHtml(carrito, categoria = null) {
+        console.log(categoria);
+        
+        const productos = this.productos.filter(producto => 
+            producto.getOferta() && (categoria ? producto.categoria == categoria : true)
+        );       
+        const Oferta = productos.length > 0 ? productos[Math.floor(Math.random() * productos.length)] : null
+        if(Oferta){
+            const btn = Oferta.buttonAgregar(carrito);
+            btn.getElement().addEventListener('click', () => 
+                ElementBuilder.closeModal('oferta')
+            );
+            const content = new ElementBuilder('div').setAttributes({class: 'row'}).addMultipleElementChild([
+                new ElementBuilder('div').setAttributes({class: 'col-12 col-md-4'}).addMultipleElementChild([
+                    new ElementBuilder('img').setAttributes({
+                        style: 'max-width: 200px;',
+                        src: Oferta.imagen,
+                        title: Oferta.nombre
+                    })
+                ]),
+                new ElementBuilder('div').setAttributes({class: 'col-12 col-md-8'}).addMultipleElementChild([
+                    new ElementBuilder('p').setAttributes({class: 'h2'}).addTextChild(
+                        Oferta.nombre
+                    ),
+                    new ElementBuilder('p').setAttributes({class: 'h3'}).addTextChild(
+                        Oferta.getOferta().descripcion
+                    ),
+                    btn
+                ])
+            ]);
+            setTimeout(() => { ElementBuilder.closeModal('oferta')}, 10000)
+            return new ElementBuilder('div').createModal('oferta', content.getElement(), {keyboard: true, backdrop: false});
+        }       
+        return false;
+    }
+
 
     /**
      * @param {HTMLElement} contenedor - select al cual adjuntar las opciones

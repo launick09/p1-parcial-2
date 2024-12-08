@@ -5,7 +5,11 @@
         "descripcion": "Licuadora de alta potencia ideal para batidos y salsas.",
         "precio": 35000.0,
         "imagen": "https://m.media-amazon.com/images/I/810Fz0Z0J2L.jpg",
-		"galeria": ["https://m.media-amazon.com/images/I/810Fz0Z0J2L.jpg"],
+		"galeria": [
+            "https://m.media-amazon.com/images/I/810Fz0Z0J2L.jpg",
+            "https://m.media-amazon.com/images/I/81sjTPU6+VL._AC_SL1500_.jpg",
+            "https://m.media-amazon.com/images/I/81PROo-azHL._AC_SL1500_.jpg"
+        ],
         "categoria": "Electrodomésticos",
         "stock": 15,
         "rating": 4.5
@@ -38,7 +42,9 @@
         "descripcion": "Cuchara de madera para mezclar y cocinar.",
         "precio": 1500.0,
         "imagen": "https://www.papelerapitti.com.ar/4962-large_default/cuchara-madera-25-cmts-.jpg",
-		"galeria": ["https://www.papelerapitti.com.ar/4962-large_default/cuchara-madera-25-cmts-.jpg"],
+		"galeria": [
+            "https://www.papelerapitti.com.ar/4962-large_default/cuchara-madera-25-cmts-.jpg"
+        ],
         "categoria": "Utensilios",
         "stock": 50,
         "rating": 4.6
@@ -49,7 +55,11 @@
         "descripcion": "Espátula de silicona resistente al calor.",
         "precio": 2000.0,
         "imagen": "https://larepo.com.ar/dlr/8337-large_default/espatula-silicona-20-cms-una-pieza-x-unid.jpg",
-		"galeria": ["https://larepo.com.ar/dlr/8337-large_default/espatula-silicona-20-cms-una-pieza-x-unid.jpg"],
+		"galeria": [
+            "https://larepo.com.ar/dlr/8337-large_default/espatula-silicona-20-cms-una-pieza-x-unid.jpg",
+            "https://www.tecsonlectra.com.ar/MLA-1369204437-espatula-100-silicona-cocina-reposteria-profesional-calidad-_JM",
+            "https://tienda.elnuevoemporio.com.ar/tienda/espatulas/espatula-enteriza-de-silicona-cocina-reposteria-"
+        ],
         "categoria": "Utensilios",
         "stock": 40,
         "rating": 4.8
@@ -159,7 +169,10 @@
         "descripcion": "Juego de 24 cubiertos de acero inoxidable.",
         "precio": 25000.0,
         "imagen": "https://acdn.mitiendanube.com/stores/305/334/products/1-4ca413b0019a22458a17207159315791-1024-1024.jpg",
-		"galeria": ["https://acdn.mitiendanube.com/stores/305/334/products/1-4ca413b0019a22458a17207159315791-1024-1024.jpg"],
+		"galeria": [
+            "https://acdn.mitiendanube.com/stores/305/334/products/1-4ca413b0019a22458a17207159315791-1024-1024.jpg",
+            "https://www.tramontina.com.ar/juego_de_cubiertos_para_asado_acero_inoxidable_con_mangos_de_madera_natural_12_piezas_22299009/p"
+        ],
         "categoria": "Cubiertos",
         "stock": 12,
         "rating": 4.8
@@ -205,7 +218,8 @@
         "imagen": "https://us.123rf.com/450wm/vecstock/vecstock2103/vecstock210301385/166032042-bolsa-de-caf%C3%A9-sobre-fondo-blanco.jpg?ver=6",
 		"galeria": [
             "https://us.123rf.com/450wm/vecstock/vecstock2103/vecstock210301385/166032042-bolsa-de-caf%C3%A9-sobre-fondo-blanco.jpg?ver=6",
-            "https://i.ytimg.com/vi/qJ1XnNTE9n0/maxresdefault.jpg"
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT8ejGvEOgfs6-WQ8BZKhQON1RB5y0tTW1yyw&s",
+            "https://es.vecteezy.com/png-gratis/grano-de-caf%C3%A9"
         ],
         "categoria": "Café",
         "stock": 9999999999,
@@ -261,7 +275,10 @@
         "descripcion": "Sable tradicional de la dinastía Qing. hoja de acero 1095 forjada a mano, con filo. cordón de color rojo. largo total: 91 cm (hoja de 70 cm.). peso: 1250 gramos desenvainado /// 1917 g. con la vaina - medidas y peso aproximados -",
         "precio": 650000.0,
         "imagen": "https://http2.mlstatic.com/D_NQ_NP_858990-MLA74805685623_022024-O.webphttps://http2.mlstatic.com/D_NQ_NP_858990-MLA74805685623_022024-O.webp",
-		"galeria": ["https://http2.mlstatic.com/D_NQ_NP_858990-MLA74805685623_022024-O.webphttps://http2.mlstatic.com/D_NQ_NP_858990-MLA74805685623_022024-O.webp"],
+		"galeria": [
+            "https://http2.mlstatic.com/D_NQ_NP_858990-MLA74805685623_022024-O.webphttps://http2.mlstatic.com/D_NQ_NP_858990-MLA74805685623_022024-O.webp",
+            "https://http2.mlstatic.com/D_NQ_NP_728221-MLA20750936335_062016-O.webp"
+        ],
         "categoria": "Accesorios",
         "stock": 0,
         "rating": 2

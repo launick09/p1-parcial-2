@@ -59,48 +59,35 @@ export class Producto{
      * @returns {String} 
      */
     toHtml(carrito = null){        
-        const cardDiv = new ElementBuilder('div')
-            .setAttributes({ 
-                class: 'card border-0 m-auto p-2 h-100 d-flex', 
-                style: 'max-width: 400px;' 
-            });
-        const infoDiv = new ElementBuilder('div').setAttributes({ class: 'd-flex justify-content-between my-1' });      
-        // stock
-        const stockElement = new ElementBuilder('p').addTextChild(`${this.stock}u disponibles`).setAttributes({ style: 'font-size: 0.7rem;' });      
-        // rating
-        const ratingElement = new ElementBuilder('p').addTextChild(`${this.rating} ★`);  
-        // imagen
-        const imageElement = new ElementBuilder('img')
-            .setAttributes({
+        const cardDiv = new ElementBuilder('div').setAttributes({ 
+            class: 'card border-0 m-auto p-2 h-100 d-flex', 
+            style: 'max-width: 400px;' 
+        }).addMultipleElementChild([
+            // imagen
+            new ElementBuilder('img').setAttributes({
                 src: this.imagen,
                 alt: this.nombre,
                 class: 'img w-100 h-auto',
                 onerror: "this.src='https://png.pngtree.com/png-vector/20190917/ourmid/pngtree-not-found-circle-icon-vectors-png-image_1737851.jpg'",
                 draggable: 'false'
-            });
-
-        // nombre del producto
-        const nameElement = new ElementBuilder('h3')
-            .addTextChild(this.nombre)
-            .setAttributes({
+            }),
+            // informacion
+            new ElementBuilder('div').setAttributes({ class: 'd-flex justify-content-between my-1' }).addMultipleElementChild([
+                new ElementBuilder('p').addTextChild(`${this.stock}u disponibles`).setAttributes({ style: 'font-size: 0.7rem;' }),      
+                new ElementBuilder('p').addTextChild(`${this.rating} ★`) 
+            ]),  
+            new ElementBuilder('h3').addTextChild(this.nombre).setAttributes({
                 class: 'text-truncate',
                 title: this.nombre
-            });      
+            }),     
+            new ElementBuilder('p').addTextChild(this.categoria).setAttributes({ class: 'text-muted badge text-start p-0' }),
+            new ElementBuilder('p').addTextChild(this.descripcion).setAttributes({ class: 'text-muted' }),
 
-        // descripcion
-        const categoryElement = new ElementBuilder('p')
-            .addTextChild(this.categoria)
-            .setAttributes({ class: 'text-muted badge text-start p-0' });
-        const descriptionElement = new ElementBuilder('p')
-            .addTextChild(this.descripcion)
-            .setAttributes({ class: 'text-muted' });
-        
+        ]);
         const precioDiv = new ElementBuilder('div')
             .setAttributes({ class: 'mt-auto' });
-
         // Verificar si tiene oferta
         const oferta = this.getOferta();
-
         // Precio
         let priceElement = new ElementBuilder('p')
             .addTextChild(`$ ${this.precio.toFixed(2)}`)
@@ -138,24 +125,8 @@ export class Producto{
         DetalleElement.getElement().addEventListener('click', () => this.getInfo(carrito));
 
         // Agregar al carrito
-        const buttonElement = new ElementBuilder('button')
-            .addTextChild('Agregar al Carrito')
-            .setAttributes({ 
-                class: 'btn btn-sm w-100 btn-warning my-1',
-                'aria-data-id': this.id
-             });
-        if(carrito){
-            buttonElement.getElement().addEventListener('click', () => carrito.addItem(this));
-        }
-            
-        // agrego todo        
-        infoDiv.addElementChild(stockElement);
-        infoDiv.addElementChild(ratingElement);
-        cardDiv.addElementChild(imageElement);
-        cardDiv.addElementChild(infoDiv);
-        cardDiv.addElementChild(nameElement);
-        cardDiv.addElementChild(categoryElement);
-        cardDiv.addElementChild(descriptionElement);
+        const buttonElement = this.buttonAgregar(carrito);
+
         precioDiv.addElementChild(DetalleElement);
         precioDiv.addElementChild(buttonElement);
         cardDiv.addElementChild(precioDiv);
@@ -266,6 +237,18 @@ export class Producto{
             .addElementChild(infoContent);
 
         return new ElementBuilder('div').createModal(producto.nombre, rowContent.getElement());
+    }
+    buttonAgregar(carrito = null) {
+        const buttonElement = new ElementBuilder('button')
+            .addTextChild('Agregar al Carrito')
+            .setAttributes({ 
+                class: 'btn btn-sm w-100 btn-warning my-1',
+                'aria-data-id': this.id
+             });
+        if(carrito){
+            buttonElement.getElement().addEventListener('click', () => carrito.addItem(this));
+        }
+        return buttonElement;
     }
 
 }

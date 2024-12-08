@@ -11,9 +11,9 @@ import { Oferta } from './clases/Oferta.js';
 
 const listado = new Stock();
 const carrito = new Carrito();
-const oferta = new Oferta();
 
 let ofertas = [];
+let categoriaAnterior = null;
 
 const button = document.getElementById('comprar');
 
@@ -32,7 +32,8 @@ function mostrar(content) {
 async function cargarOfertasJson() {
     console.log('cargando ofertas..');
     try {
-        const respuesta = await fetch('/ofertas.json');
+        // const respuesta = await fetch('/ofertas.json');
+        const respuesta = await fetch('https://launick09.github.io/p1-parcial-2/ofertas.json');
         const ofertasJson = await respuesta.json();
         ofertas = ofertasJson.map(ofertaData => new Oferta(
             ofertaData.id,
@@ -56,8 +57,8 @@ async function cargarJson() {
         // Esperar a que las ofertas se carguen primero
         await cargarOfertasJson();
 
-        // const respuesta = await fetch('https://launick09.github.io/p1-parcial-2/productos.json');
-        const respuesta = await fetch('/productos.json');
+        const respuesta = await fetch('https://launick09.github.io/p1-parcial-2/productos.json');
+        // const respuesta = await fetch('/productos.json');
         const productos = await respuesta.json();
 
         listado.createFromJson(productos);
@@ -79,7 +80,6 @@ async function cargarJson() {
 
 function vincularOfertasConProductos(productos, ofertas) {
     productos.forEach(producto => {
-        
         const ofertasValidas = ofertas.filter(oferta => oferta.esValida(producto));
         producto.ofertas = ofertasValidas;
     });
@@ -87,15 +87,17 @@ function vincularOfertasConProductos(productos, ofertas) {
 
 function filtrarProductos() {    
     const rangoMax = Number(rangoMaximo.value) || Infinity;
-    
     const categoria = String(document.getElementById('categoria').value) || null;
-
     const productos = listado.productos.filter(producto => {
         const estaEnRango = producto.precio <= rangoMax;
         const estaEnCategoria = categoria ? producto.categoria === categoria : true;
         return estaEnRango && estaEnCategoria;
     });
     mostrar(listado.toHtml(carrito, productos));
+    if (categoria !== categoriaAnterior) {
+        listado.ofertaToHtml(carrito, categoria);
+        categoriaAnterior = categoria; // Actualizar la categoría anterior
+    }
 }
 
 

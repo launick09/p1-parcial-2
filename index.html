@@ -18,9 +18,9 @@
     </head>
 
     <body class="d-flex flex-column grow" style="min-height: 100vh !important;">
-        <header class="border-bottom border-warning">
+        <header>
             <!-- Reemplazar por los datos que correspondan -->
-            <nav class="navbar py-3 navbar-expand-lg bg-light" style="background-color: #e3f2fd;">
+            <nav class="navbar py-3 navbar-expand-lg bg-light border-bottom border-warning" style="background-color: #e3f2fd;">
                 <div class="container">
                     <a class="navbar-brand text-dark" href="#">Programación I | Parcial 2 | ARROYO</a>
                     <button id="comprar" class="btn position-relative" style="outline:none; box-shadow: none; padding: 0;">
@@ -31,7 +31,40 @@
                     </button>
                 </div>
             </nav>
-            <div class="navbar py-1 navbar-expand-lg bg-light">
+            <div class="w-100">
+                <div id="indicadores" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <picture>
+                                <source srcset="images/m_banner_descuento.webp" class="w-100" media="(max-width: 576px)">
+                                <img src="images/banner_descuento.webp" class="w-100" alt="Descuento en Cuchillos y Cubiertos">
+                            </picture>
+                        </div>
+                        <div class="carousel-item">
+                            <picture>
+                                <source srcset="images/m_banner_oferta.webp" class="w-100" media="(max-width: 576px)">
+                                <img src="images/banner_oferta.webp" class="w-100" alt="Descuento en compras Muy Grandes">
+                            </picture>
+                        </div>
+                        <div class="carousel-item">
+                            <picture>
+                                <source srcset="images/m_banner_oferta2.webp" class="w-100" media="(max-width: 576px)">
+                                <img src="images/banner_oferta2.webp" class="w-100" alt="Descuento en compras">
+                            </picture>
+                        </div>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#indicadores" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true">
+                        </span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#indicadores" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" 
+                            aria-hidden="true">
+                        </span>
+                    </button>
+                </div>
+            </div>
+            <div class="navbar py-1 navbar-expand-lg bg-light border-bottom border-warning">
                 <div class="container">
                     <div id="filtros" class="d-flex flex-wrap align-items-center w-100" style="gap:1rem">
                         <div class="rango">
@@ -61,39 +94,6 @@
                 </div>
             </div>
         </header>
-        <div class="w-100">
-            <div id="indicadores" class="carousel slide" data-bs-ride="carousel">
-                <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <picture>
-                            <source srcset="images/m_banner_descuento.webp" class="w-100" media="(max-width: 576px)">
-                            <img src="images/banner_descuento.webp" class="w-100" alt="Descuento en Cuchillos y Cubiertos">
-                        </picture>
-                    </div>
-                    <div class="carousel-item">
-                        <picture>
-                            <source srcset="images/m_banner_oferta.webp" class="w-100" media="(max-width: 576px)">
-                            <img src="images/banner_oferta.webp" class="w-100" alt="Descuento en compras Muy Grandes">
-                        </picture>
-                    </div>
-                    <div class="carousel-item">
-                        <picture>
-                            <source srcset="images/m_banner_oferta2.webp" class="w-100" media="(max-width: 576px)">
-                            <img src="images/banner_oferta2.webp" class="w-100" alt="Descuento en compras">
-                        </picture>
-                    </div>
-                </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#indicadores" data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true">
-                    </span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#indicadores" data-bs-slide="next">
-                    <span class="carousel-control-next-icon" 
-                        aria-hidden="true">
-                    </span>
-                </button>
-            </div>
-        </div>
         <main class="flex-grow-1 my-2">           
             <div class="container">
                 <!-- Este es un ejemplo de contenedor de carrito -->

@@ -101,7 +101,7 @@ export class ElementBuilder {
      * @param {HTMLElement | string} contenido - el contenido.
      * @returns {HTMLElement} -El modal.
      */
-    createModal(titulo = 'modal', contenido) {
+    createModal(titulo = 'modal', contenido, options = {}) {
         let modalId = titulo;
         modalId = modalId.toLowerCase().replace(/\s+/g, '');
         const existingModal = document.getElementById(modalId);
@@ -131,8 +131,8 @@ export class ElementBuilder {
             class: 'modal fade',
             id: modalId,
             'aria-labelledby': modalId + "Label",
-            'data-bs-backdrop': "static",
-            'data-bs-keyboard': "false"
+            'data-bs-backdrop': options.backdrop ? options.backdrop : 'static',
+            'data-bs-keyboard': options.keyboard ? options.keyboard : "false"
         });
     
         const modalDialog = new ElementBuilder('div').setAttributes({ class: 'modal-dialog modal-lg' });
