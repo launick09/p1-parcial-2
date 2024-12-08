@@ -25,13 +25,13 @@ export class Carrito {
         if (itemIndex >= 0) {
             let productoAgregado = this.items[itemIndex];
             if (producto.stock < productoAgregado.cantidad + cantidad) {
-                alert(`Stock insuficiente para ${producto.nombre}. ${producto.stock} unidades disponibles.`);
+                new ElementBuilder('div').alert(`Stock insuficiente para ${producto.nombre}. ${producto.stock} unidades disponibles.`);
                 return;
             }            
             productoAgregado.cantidad += cantidad;
         } else {
             if (producto.stock < cantidad) {
-                alert(`Stock insuficiente para ${producto.nombre}. ${producto.stock} unidades disponibles.`);
+                new ElementBuilder('div').alert(`Stock insuficiente para ${producto.nombre}. ${producto.stock} unidades disponibles.`);
                 return;
             }
             this.items.push({ producto, cantidad });

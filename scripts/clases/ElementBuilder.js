@@ -265,4 +265,8 @@ export class ElementBuilder {
         return container.addElementChild(label).addElementChild(select);
     }
 
+    alert(message, alert = 'Error!'){
+        this.createModal(alert, message);
+    }
+
 }
