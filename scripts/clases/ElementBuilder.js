@@ -9,11 +9,20 @@
  * Helper para crear elementos HTML
  * 
  * Métodos:
- * - constructor(tag): Crea un nuevo elemento HTML con la etiqueta especificada.
+ * 
+ * - constructor(tag): Crea un nuevo elemento HTML con la etiqueta especificada. Si la etiqueta es inválida, crea un div.
  * - setAttributes(atributos): Establece atributos en el elemento creado.
  * - addTextChild(texto): Agrega texto como hijo del elemento.
  * - addElementChild(hijo): Agrega otro elemento como hijo del elemento actual.
+ * - addMultipleElementChild(hijos): Agrega múltiples hijos al elemento.
  * - getElement(): Devuelve el elemento.
+ * - removeElement(elemento): Elimina un elemento del DOM.
+ * - createModal(titulo, contenido, options): Crea un modal de Bootstrap con un título, contenido y opciones configurables.
+ * - closeModal(modalId): Cierra y elimina un modal existente por su ID.
+ * - createList(contenido, list): Crea una lista HTML (ul o ol) con elementos especificados.
+ * - createInput(titulo, type, nombre, atributos): Crea un input con un label asociado.
+ * - createSelect(titulo, nombre, opciones, atributos): Crea un elemento select con opciones.
+ * - alert(message, alert): Crea un modal simple para mostrar mensajes de alerta.
  */
 
 export class ElementBuilder {

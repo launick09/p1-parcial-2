@@ -32,11 +32,8 @@ export class Checkout {
             this.#generarCampo('Teléfono:', 'number', 'cel', 'form-group mb-3', { min: 0 }, {value: this.#valores.cel || ''}),
 
             new ElementBuilder('div').createSelect('Método de Pago:', 'pago', ['Debito', 'Credito', 'Organo'], {value: this.#valores.pago || ''}),
-        ]);
-
-        formulario.addElementChild(
             new ElementBuilder('button').addTextChild('Confirmar Compra').setAttributes({ type: 'submit', class: 'btn btn-success' })
-        );
+        ]);
 
         formulario.getElement().addEventListener('submit', (e) => {
             e.preventDefault();

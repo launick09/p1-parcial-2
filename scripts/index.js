@@ -100,10 +100,16 @@ function filtrarProductos() {
     }
 }
 
-
 window.addEventListener('DOMContentLoaded', () => {
     cargarJson();   
     button.addEventListener('click', () => carrito.toHtml());
+
+    document.querySelectorAll('.carousel-item').forEach(item => {       
+        item.addEventListener('click', () => {
+            document.getElementById('categoria').value = item.getAttribute('aria-categoria');
+            filtrarProductos();
+        })
+    })
 });
 
 document.querySelectorAll('#filtros .change').forEach(input => {

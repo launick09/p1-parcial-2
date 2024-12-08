@@ -159,8 +159,6 @@ export class Carrito {
 
                 const Oferta = item.producto.getOferta();
                 const tieneOferta = Oferta ? Oferta.esValida(item.producto, item.cantidad) : false;   
-                console.log(Oferta);
-                            
 
                 const productPrice = new ElementBuilder('div').addMultipleElementChild([
                     new ElementBuilder('p')
